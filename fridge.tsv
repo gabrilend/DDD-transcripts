@@ -15,3 +15,5 @@ date	sticker	patch	reason
 2026-09-15	gold-star	0.0-before-the-first-demo	spotted with her own eyes that some coloured words came out dimmer than the plain words around them, which measurement then confirmed in eight places, and asked for the right fix rather than a patch
 2026-09-15	apple	0.0-before-the-first-demo	gave the name banding rule with a worked example attached, which went straight into the code and straight into a test without needing a single thing invented
 2026-09-15	gold-star	0.0-before-the-first-demo	the rule that the colours live in one place a player can reach and everything that colours a word asks that place, which is an architecture decision and a good one, delivered as an aside
+2026-09-15	gold-star	0.0-before-the-first-demo	renamed the heartbeat to a tickle, which is sillier and therefore correct, and which turned out to be a seven-hundred-occurrence rename that had to leave two hundred and fifty stickers standing
+2026-09-15	apple	0.0-before-the-first-demo	asked for the text to resize with the wheel and with plus and minus, and for equals to put it back
