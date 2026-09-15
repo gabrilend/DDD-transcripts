@@ -21,3 +21,5 @@ date	sticker	patch	reason
 2026-09-15	apple	0.0-before-the-first-demo	asked for the themes to be pointed at rather than written down, before the map existed to hard-code them into
 2026-09-15	gold-star	0.0-before-the-first-demo	the orange trail: point at a key and it shows you the door, point at the door and it shows you the key, drawn through the centres of the rooms between them
 2026-09-15	apple	0.0-before-the-first-demo	K then a number for keys, T then a number for tiles, and the zoom moved off the letters and onto the map where it belonged
+2026-09-15	gold-star	0.0-before-the-first-demo	caught the pathing bug from a screenshot and said the right thing about it: that it matters because the same algorithm goes into the full game, not because the helper script looked wrong
+2026-09-15	apple	0.0-before-the-first-demo	asked for pointy and flat hexagons as a preference, and said out loud that it should not affect gameplay, which is the part that made it easy to build

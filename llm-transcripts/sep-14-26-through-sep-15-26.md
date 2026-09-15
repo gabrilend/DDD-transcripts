@@ -1,6 +1,6 @@
 # Conversation Summary: f76814ba-6c5e-46ea-90d1-128d98043fd5
 
-Generated on: 2026-09-15 14:24:16
+Generated on: 2026-09-15 14:34:34
 
 --------------------------------------------------------------------------------
 
@@ -4225,5 +4225,97 @@ which is not "did anyone ever remove this" but "is it still gone."
 We have laid four bricks now. Next along the roadmap is either the **tickle**
 itself, or keeping on with the map: rooms filling with monsters, and the fog
 that closes a corridor behind you. Which one?
+
+--------------------------------------------------------------------------------
+
+### User Request 69
+
+Yay okay!! Can we change it so that zooming doesn't zoom the charactermers in
+the fonts for the mappum checkum, but instead zoomezuh in or away from the map?
+Also um can we make it so if you push K then type a number then it'll make you a
+new map with that'm mameny keyds? oh oh also we should do T for Tiles and if you
+push T then it'll make a new map with the number of keys you previously entered
+(default 3) and the new number of tiles you want. If there's not enough to make
+a perfect hexagon that's okay but it should be close to square. Also if we mouse
+over a tile with a key then it should point'm to the key that unlocks it by
+drawing lines to the center of each of the connected hexes in orange so we can
+see the path to it. Same for if we mouse over the locked wall it should point to
+the key room.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 69
+
+Good asks, all five. Let me do the builder first: a map can stop being a
+hexagon, and it needs to know its own paths.
+
+Exact room counts, close to square, and paths work. Now the viewer: camera zoom,
+the K and T prompts, and the orange trails.
+
+40 rooms exactly, 4 keys, close to square. Now let me force the mouse onto a key
+room to check the orange trail.
+
+The trail works, and it says how far. One cosmetic fix: the dots are swallowing
+the key labels.
+
+The checker is now flagging *my corruption* of your line as missing, because I
+removed it when I put yours back. It needs to tell your lines from lines I made.
+
+All five things you asked for. **Thirteen gold stars and seven apples.**
+
+```
+./scripts/check-map
+```
+
+| key | what it does |
+| --- | --- |
+| wheel | zooms the **map**, not the letters |
+| drag | slides the map around |
+| **K** then a number | new map, that many keys, same rooms |
+| **T** then a number | new map, that many rooms, same keys |
+| **=** | back to the start |
+| N, F | new level, walk one room |
+
+Rest the pointer on a key room and an **orange trail** runs to the door it
+opens, through the centre of every room between, with a ring at each end and a
+line saying how far. Rest it on the locked door instead and the trail runs the
+other way. It is the same walk either way, so it is found once and drawn once.
+
+★ Insight
+─────────────────────────────────────
+Two things in there are worth knowing.
+**"Close to square" had to mean square on screen, not square in rooms.** A
+pointy-topped hexagon is wider than it is tall by the ratio of √3 to 1.5. A
+level laid out square by count comes out visibly wide. So it uses about six
+columns for every seven rows, and the test measures the *pixel* shape, not the
+room shape.
+**The wheel multiplies instead of adding.** Adding a tenth to a zoom of 1
+changes the picture a lot; adding a tenth to a zoom of 10 changes it almost
+nothing. Multiplying makes every notch feel the same at every zoom, which is why
+every program that gets this right does it that way.
+─────────────────────────────────────────────────
+
+The ragged last row is on purpose. If you ask for forty you get forty, even if
+that leaves a bumpy edge. Thirty-six in a tidy rectangle would be the wrong
+answer to your question.
+
+One more thing to tell you, because it is the same mistake following me around.
+When I put your corrupted sentence right, the checker reported **the repair** as
+a lost line of yours, because the corrupted version also started with an arrow.
+It now asks **whose line it was** before calling anything missing, and it can
+tell: every commit I make carries a line with my name on it, and yours do not.
+
+★ Insight
+─────────────────────────────────────
+That is a nice property to have stumbled into. The commit trailer was there for
+attribution, and it turns out to be the only durable record of which hand wrote
+a given line. A checker that guards your writing can now actually tell your
+writing apart from mine, after the fact, without anybody having tagged anything.
+─────────────────────────────────────────────────
+
+Four bricks laid, four tests, and the map is real. Next could be **rooms filling
+with monsters** so the map starts to move, or the **tickle** so that the filling
+has a clock to happen on. The tickle is the more foundational one and the map is
+the more fun one.
 
 --------------------------------------------------------------------------------
