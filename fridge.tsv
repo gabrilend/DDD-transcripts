@@ -19,3 +19,5 @@ date	sticker	patch	reason
 2026-09-15	apple	0.0-before-the-first-demo	asked for the text to resize with the wheel and with plus and minus, and for equals to put it back
 2026-09-15	gold-star	0.0-before-the-first-demo	drew the map out loud: black, dark grey rooms, yellow for locked, red for walls, and an open door as a line with its middle third missing, which is how a floor plan says doorway
 2026-09-15	apple	0.0-before-the-first-demo	asked for the themes to be pointed at rather than written down, before the map existed to hard-code them into
+2026-09-15	gold-star	0.0-before-the-first-demo	the orange trail: point at a key and it shows you the door, point at the door and it shows you the key, drawn through the centres of the rooms between them
+2026-09-15	apple	0.0-before-the-first-demo	K then a number for keys, T then a number for tiles, and the zoom moved off the letters and onto the map where it belonged
