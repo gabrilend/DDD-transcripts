@@ -1,6 +1,6 @@
 # Conversation Summary: f76814ba-6c5e-46ea-90d1-128d98043fd5
 
-Generated on: 2026-09-15 14:34:34
+Generated on: 2026-09-15 14:47:41
 
 --------------------------------------------------------------------------------
 
@@ -4317,5 +4317,117 @@ Four bricks laid, four tests, and the map is real. Next could be **rooms filling
 with monsters** so the map starts to move, or the **tickle** so that the filling
 has a clock to happen on. The tickle is the more foundational one and the map is
 the more fun one.
+
+--------------------------------------------------------------------------------
+
+### User Request 70
+
+um how about we just take out the checker that looks for my limes and just have
+it as a refemerence fi-all that you're told to incorpomoroate into your context
+every time you forget.
+
+WOW it looks good! I took a picture and put it in the develomoment/ directomory
+and it shows a bug. If this was a little helper script then I wouldn't care but
+we're probabably wanna gonna be able to try and use the same algomorithm for the
+full game. So um can you help? What happens is the path points to the far side
+of a locked room. It should point to the closest hex not the one that's "first"
+or something. I donno how it works behind the scenes.
+
+Also can we add a button that switches to pointy topped or flat topped
+hexamagons? The user should be able to dynam-i-call-y switch between 'em in the
+options menu, and it shouldn't affect gameplay right? It's just preference.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 70
+
+Let me look at your picture first.
+
+That is a perfect bug report. The trail loops all the way round to the **wrong
+side** of the lock.
+
+★ Insight
+─────────────────────────────────────
+Here is what is actually wrong, and you were right that it matters beyond this
+tool.
+A door sits between two rooms and is stored once, under whichever room's address
+sorts first. I called those two rooms `near` and `far`. **Those names were a
+lie.** Nothing about sorting has anything to do with which side you are standing
+on. The trail was ending at the arbitrary one, and half the time that is the far
+side, so it walked all the way round through the only other route.
+The honest question is "which side of this lock is the key on", and there is a
+clean way to ask it: **close that one door and see which of the two rooms you
+can still reach.** Because a lock only ever goes on a bridge, exactly one of
+them survives.
+─────────────────────────────────────────────────
+
+A coin flip: **52% of the time** it picked the wrong side. Let me fix the viewer
+and add your orientation toggle at the same time, since both are geometry.
+
+`place` is defined after the function that uses it, so Lua reads it as a global.
+Let me move it up.
+
+The rename from `near` to `side_one` left one caller behind.
+
+Both orientations, same level, same trail, same 48 rooms. Now your other two
+asks.
+
+The rename broke my own test, which is the test doing its job. Let me update it.
+
+All three done. **Fourteen gold stars and eight apples**, and the gold star is
+for the bug report, not the bug.
+
+**Your bug is fixed, and you were right that it mattered.** The cause was a
+*name*.
+
+★ Insight
+─────────────────────────────────────
+A door is stored once, under whichever of its two rooms sorts first. I called
+those two rooms `near` and `far`. **Sorting has nothing to do with where anyone
+is standing.** So the trail aimed at whichever room happened to sort first, and
+I measured it across 180 locks: that was the wrong room **52% of the time**. A
+coin flip, which is exactly what it was.
+They are called `side_one` and `side_two` now, which claims nothing. And the
+question worth asking is asked properly: **shut that one door and see which side
+you can still reach the key from.** A lock only ever sits on a bridge, so
+shutting it cuts the level in two and exactly one side survives.
+─────────────────────────────────────────────────
+
+The trail is also drawn with that lock **shut**, so it can never cheat by
+walking through the very door it is pointing at.
+
+**Press O** to turn the hexagons. Same level, same rooms, same doors, same
+trail, turned thirty degrees. It is a preference and it changes nothing, exactly
+as you said.
+
+★ Insight
+─────────────────────────────────────
+One thing did **not** follow from that thirty degrees, and it would have been a
+nasty one. I had a lookup table of "which two corners make the wall between a
+room and its neighbour". Turning the shape **renumbers every corner**, so that
+table was right for one orientation and silently wrong for the other. Walls
+would have been drawn on the wrong edges.
+It is found rather than looked up now: ask which two corners lie nearest the
+neighbour's middle. That is true of any orientation, and it also cannot fall out
+of step with the direction order the map builder uses, which the table could.
+─────────────────────────────────────────────────
+
+**One thing I want to flag.** Flat-topped makes the level a diamond rather than
+a rough square, because the square-ish layout is worked out in pointy-topped
+terms. It is only cosmetic and it only happens for the room-count shape. Say the
+word and I will make the layout know which way up the hexagons are.
+
+**The checker that watched your lines is gone**, and what replaced it is better.
+`her-answers.md` now holds every line you have written, under the question it
+answers, in your own words. It rebuilds on every test run so it can never go
+stale, and the guidance file tells me to read it when I have forgotten what was
+decided.
+
+```
+./collect-her-answers
+```
+
+54 answers in there right now. Your reasoning was the right one: a thing you
+read is more use than a thing that tells you off.
 
 --------------------------------------------------------------------------------

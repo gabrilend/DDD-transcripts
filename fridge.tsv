@@ -23,3 +23,4 @@ date	sticker	patch	reason
 2026-09-15	apple	0.0-before-the-first-demo	K then a number for keys, T then a number for tiles, and the zoom moved off the letters and onto the map where it belonged
 2026-09-15	gold-star	0.0-before-the-first-demo	caught the pathing bug from a screenshot and said the right thing about it: that it matters because the same algorithm goes into the full game, not because the helper script looked wrong
 2026-09-15	apple	0.0-before-the-first-demo	asked for pointy and flat hexagons as a preference, and said out loud that it should not affect gameplay, which is the part that made it easy to build
+2026-09-15	gold-star	0.0-before-the-first-demo	the longest journey rule, priced by the detour to each key and back, which turns out to put the ghost somewhere a door count would not on twenty-five levels in thirty
