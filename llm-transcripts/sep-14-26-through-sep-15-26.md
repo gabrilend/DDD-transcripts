@@ -1,6 +1,6 @@
 # Conversation Summary: f76814ba-6c5e-46ea-90d1-128d98043fd5
 
-Generated on: 2026-09-15 14:54:25
+Generated on: 2026-09-15 15:07:11
 
 --------------------------------------------------------------------------------
 
@@ -4502,5 +4502,105 @@ So the map is done for now. The next thing is the one it has been waiting for:
 **the tickle**, the heartbeat everything else counts in. After that, rooms start
 filling with monsters and the map stops being a picture and starts being a
 place.
+
+--------------------------------------------------------------------------------
+
+### User Request 72
+
+oh um, how about we do the algorithimum like this:
+
+first draw the map, with doors, locked doors, open floorplans, and walls.
+
+then we find the longest path, placing the entrance and ghost room.
+
+then, we place the keys such that they're correctly accessible.
+
+we should just have locked doors count twice, making them twice as valuable.
+Instead of having it count twice for the walk, let's just say that it takes 2x
+as long and leave it at that. I um think that'll make it easier.
+
+Also, no keys should spawn in the entrance or ghost rooms.
+
+Also, if you mouse over the in room it should show the path to take, hitting all
+the keys required as well. If you mouse over the ghost room it should just show
+the shortest path to the entrance.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 72
+
+That order is better than mine, and the flat doubling removes a whole pile of
+arithmetic. Let me restructure the builder.
+
+Three of those levels ended with **zero keys**, which means the locks were
+placed and then all unlocked. Let me find out why.
+
+Found it. The entrance ends up **sealed in behind a locked door**, reaching
+exactly one room, so no key can ever be placed.
+
+★ Insight
+─────────────────────────────────────
+And it is a direct consequence of your own rule, which is what makes it
+interesting. The way in is an end of the *longest journey*, and a locked door
+counts double, so the furthest-away places tend to be **exactly the ones behind
+locks**. The measurement that picks a good ghost room also picks a bad entrance.
+So a lock the guild is sealed behind is a lock in the wrong place, and the key
+step has to be allowed to say so.
+─────────────────────────────────────────────────
+
+93% of locks keep their key, every level is solvable, no key lands in an end
+room, and the way in is always on the border. Now the two hovers you asked for.
+
+That is the whole run: out of the way in, across to the first key, down for the
+second, back for the third, and on to the ghost. **25 rooms, fetching 3 keys.**
+
+All four changes are in. **Sixteen gold stars and eight apples.**
+
+Your order is now the order: **doors, then locks, then the two ends, then the
+keys.** It is better than mine and the reason is clean.
+
+★ Insight
+─────────────────────────────────────
+A key belongs to **whoever is walking**, and nobody is walking until the way in
+is known. So the locks go on bridges with no keys at all, the ends get found,
+and only then do the keys get placed, in waves spreading out from the way in.
+That makes the chain unbreakable by construction. Every key is dropped in a
+region the party has **already walked into**, so a key can never be behind a
+lock that needs it. My old version had to place a lock, test the whole level,
+and take the lock back off if it had made a ring. Yours does not need the test.
+─────────────────────────────────────────────────
+
+**Your simplification was right too.** A locked door is just twice a step now.
+The old detour pricing measured the same idea exactly, took a paragraph to
+explain, and could not be worked out until every key was placed, which is
+precisely what stopped the steps happening in your order.
+
+**No key goes in either end room.** Checked across 109 keys.
+
+**One thing I have to report, because it is your rule biting its own tail.**
+
+★ Insight
+─────────────────────────────────────
+The way in is an end of the longest journey. A locked door counts double. So the
+rooms that are *furthest away* are **exactly the ones sitting behind locks** —
+and the measurement happily picked an entrance sealed in a pocket of **one
+room**, with no possible place to put a key, because the only room available was
+the entrance and the entrance never holds one.
+A lock the guild is sealed behind is a lock in the wrong place. So when a wave
+finds nowhere to put a key, the door penning the party in opens and the wave
+runs again. Across forty levels, **111 locks out of 120** keep their key. The
+nine that do not were on levels that were never going to work with them.
+─────────────────────────────────────────────────
+
+**Both hovers work.** The picture above is the way in: 25 rooms, fetching 3
+keys, doubling back twice. There is a dot at every room now, because the route
+crosses itself and a bare line was hard to follow. The ghost room draws the way
+home with all keys in hand, since by the time anyone is standing there they have
+them.
+
+Five test files, all passing, and one of them now checks that the run really
+walks door by door and never passes a lock before picking up its key.
+
+The map is genuinely done. Next is the **tickle**.
 
 --------------------------------------------------------------------------------

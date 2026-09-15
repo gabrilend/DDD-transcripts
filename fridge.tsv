@@ -25,3 +25,6 @@ date	sticker	patch	reason
 2026-09-15	apple	0.0-before-the-first-demo	asked for pointy and flat hexagons as a preference, and said out loud that it should not affect gameplay, which is the part that made it easy to build
 2026-09-15	gold-star	0.0-before-the-first-demo	the longest journey rule, priced by the detour to each key and back, which turns out to put the ghost somewhere a door count would not on twenty-five levels in thirty
 2026-09-15	gold-star	0.0-before-the-first-demo	reordered the build so a key is placed after the way in is known, and cut the detour arithmetic down to a locked door simply taking twice as long, which is the same idea in one sentence
+2026-09-15	gold-star	0.0-before-the-first-demo	four windows, three in a column and one really tall: a worked example of a bug that cannot happen yet, because resizing is not built
+2026-09-15	gold-star	0.0-before-the-first-demo	why a window must not move the instant the mouse comes back: the cursor is invisible, so the window is the only thing telling you where it is
+2026-09-15	apple	0.0-before-the-first-demo	the windowing round: swap past halfway, close past seven tenths off, do not squeeze, and pay the debt back before moving
