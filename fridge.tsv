@@ -28,3 +28,6 @@ date	sticker	patch	reason
 2026-09-15	gold-star	0.0-before-the-first-demo	four windows, three in a column and one really tall: a worked example of a bug that cannot happen yet, because resizing is not built
 2026-09-15	gold-star	0.0-before-the-first-demo	why a window must not move the instant the mouse comes back: the cursor is invisible, so the window is the only thing telling you where it is
 2026-09-15	apple	0.0-before-the-first-demo	the windowing round: swap past halfway, close past seven tenths off, do not squeeze, and pay the debt back before moving
+2026-09-15	gold-star	0.0-before-the-first-demo	caught the name colours reading backwards by eye: a three-letter band in front of a five-letter one, which is a picture that lies
+2026-09-15	gold-star	0.0-before-the-first-demo	the room puzzle window: an exclamation mark that says WHICH puzzle, a place to watch from with no buttons, and no art budget baked into the idea
+2026-09-15	frowny-face	0.0-before-the-first-demo	one window out of the five asked for

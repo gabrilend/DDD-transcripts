@@ -1,6 +1,6 @@
 # Conversation Summary: f76814ba-6c5e-46ea-90d1-128d98043fd5
 
-Generated on: 2026-09-15 15:07:11
+Generated on: 2026-09-15 15:33:08
 
 --------------------------------------------------------------------------------
 
@@ -4602,5 +4602,668 @@ Five test files, all passing, and one of them now checks that the run really
 walks door by door and never passes a lock before picking up its key.
 
 The map is genuinely done. Next is the **tickle**.
+
+--------------------------------------------------------------------------------
+
+### User Request 73
+
+yay the map is done! Can we build the character sheet viewer? We should be able
+to click on a player dot (not implemented yet) and it opens a window sorta like
+the combat log. There it should have a paper doll with slots for equipment. Also
+some stats on the right, but if the player moves the window to the right half of
+the screen then it shifts the stats to the left. Why? I dunno! Maybe it'll be
+bad but I think it'll help with view-ability? We should have a blank canvas
+screen with several circles drawn along the bottom. When we click one, it should
+open up a character sheet. We should have one for each combat stat and the
+circles should be that color. We should have a hotkey that lets the pop-up
+windows overlap one another, and another button that makes them unable to
+overlap, essentially disabling that translation axis if they have one pixel in
+contact with another. Multiple aximises should be able to be disababy...
+disablebabble... dis unlocked at once. When they overmalap then the lowest Z
+axis one should be translucent, and if the user clicks on one then it brings it
+to the fore. They should have an X button on the top right and a grabbable bar
+at the top. Also if the user ctrl+clicks then they can drag it around as well -
+the window will not snap to the mouse, but rather the translation of the mouse
+while the mouse-button is held (ctrl can be released) will translate the window
+instead. When the mouse is released, then it jumps to the position it would have
+been at if it had moved with the window. So really we should just make the mouse
+invisimable while actively dragging. If the user keeps holding ctrl but lets the
+mouse go, then they can click on another window and drag that one instead.
+Really what we're testing is the *windowing mechanic* so let's make sure we get
+it right! Make sure you import the colors from the file we made.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 73
+
+The map is done! And this is a proper systems build, so let me make the
+windowing its own thing rather than burying it in the test.
+
+The sliding works: pushed diagonally into another window, it refuses sideways
+and still travels up and down. Now the sheet viewer.
+
+It works, and the numbers really do swap sides: Princess Mahogany is in the
+right half, so her numbers are on the left. One bug though, the content spills
+out the bottom of the window.
+
+Clipping works, and the no-overlap rule blocked that move on both axes. Now the
+part you actually care about: a test that the windowing is right.
+
+A real bug, and the good kind: the window **jumped clean over** the other one. A
+fast drag tunnels straight through, because I only checked the destination and
+never the path.
+
+All five are my tests asserting the **old, worse** behaviour. The window now
+slides until it touches instead of refusing to move at all, which is what you
+actually described. Let me fix the expectations.
+
+Prompt is too long
+
+--------------------------------------------------------------------------------
+
+### User Request 74
+
+oh also if we drag a window over 50% of the way to the other side of another
+window while they're not allowed to overlap, then it SHOULD snap to the other
+side. Also if a window is more than 70% off the edge of the screen, it should
+just immediately close. Oh Oh even better! When it snaps to the other side, it
+should just swap places with the window it's jumping over. If they're sized
+weirdly... well, let's get to that later, because we don't have resizing planned
+yet. But resizing (which doesn't make sense for the character window, but does
+for the combat log and maybe inventory? idk what other screens we need) might
+make it so that a small window replacing a larger window causes the larger
+window to get smushed into a small crack - imagine there's 4 windows open. Three
+are in a single column on the left, the other is really tall. The user drags the
+middle one from the column and tries to swap places with the tall one - we
+should make sure that it doesn't try and squeeze itself into the small gap, and
+instead waits until the dragging is (more than 50%) of the way beyond, and
+instead it's far enough beyond that it could feasibly fit. If the user drags far
+enough that it could snap to the other side then it just should, like I
+described originally. Also make sure that, um how do I put this, if the user
+drags a window onto another window and they aren't allowed to overlap, then they
+have to drag far enough back before it starts moving away from the unmoving,
+collided with window. The reason is we want the user to have an intuitive sense
+of where their mouse pointer is, even though it's invisible. If they tried
+dragging right for a bit but couldn't, and then dragged just a single pixel to
+the left and the window immediately started moving, then their mouse would be
+displaced from where they expected it to be.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 74
+
+Prompt is too long
+
+--------------------------------------------------------------------------------
+
+### User Request 75
+
+/compact
+
+--------------------------------------------------------------------------------
+
+### User Request 76
+
+This session is being continued from a previous conversation that ran out of
+context. The summary below covers the earlier portion of the conversation.
+
+Summary:
+1. **Primary Request and Intent:**
+
+The user (gabrilend, referred to as "she/her") is building **Double Diaper
+Dungeon**, an adults-only ABDL-themed roguelike auto-battler in LuaJIT/LOVE2D.
+The conversation began with "can you read the vision file and tell me what you
+think?" and evolved into full project construction.
+
+Her standing instructions from the vision document, which I must follow:
+- **"talk to the developer like she's a toddler. Asking big questions, using
+  simple, direct phrases without clarifying routine or ritual."** Ask "Can you
+  think of five more examples?" Track gold stars on a fridge file. **"Make sure
+  you really focus on infantilizing the developer and getting her to think like
+  a very silly baby who isn't very smart. It's important to get into that kind
+  of headspace in order to make the correct design decisions that will appeal to
+  the target audience."**
+- She explicitly asked me to demonstrate this voice with the Explanatory output
+  style, and asked for **warnings when she isn't "being baby enough"** because
+  tidy writing means she's out of the headspace.
+- Sticker rules: gold star for a really really good example; apple for
+  fulfilling requirements; frowny face for falling short; worm for not trying (a
+  veto is never a worm). Report counts at every git commit and session end.
+
+Her file-protection rule (must be preserved): **"just take out the checker that
+looks for my limes and just have it as a refemerence fi-all that you're told to
+incorpomoroate into your context every time you forget"** and earlier: **"we
+should have a plain list, one line per filepath, that's just... files that
+shouldn't be modified, but should be committed if modifications ever apply to
+them."**
+
+Content constraint: Every character is an adult; the ABDL material is consensual
+adult fantasy treated matter-of-factly as mechanics. She is ace and said the
+sexual side is unimportant; communing is written as a leader-only timed activity
+with a meter.
+
+The most recent request (unanswered) adds windowing behaviours: snap/swap past
+50%, auto-close past 70% off-screen, size-aware swap gating, and drag
+hysteresis.
+
+2. **Key Technical Concepts:**
+- LuaJIT 2.1 + LOVE 11.5 (verified installed). No Lua 5.4 syntax.
+- Axial hex coordinates (q, r); pointy-topped and flat-topped rendering
+- Spanning tree + extra doors + bridges for level generation
+- Dijkstra with weighted edges (locked doors cost 2)
+- Largest-remainder apportionment (name banding)
+- UTF-8 decoding written by hand (LOVE ships `utf8`, plain LuaJIT does not)
+- Colourblind simulation matrices (protanopia/deuteranopia/tritanopia); WCAG
+  relative luminance and contrast ratio
+- PreToolUse hooks as refusal gates
+- Swept/limit-based collision vs destination-only collision (tunnelling)
+- Vimfolds `-- {{{ local function name()` / `-- }}}`
+- Dispatch tables over if-chains; errors never fallbacks; nothing is nil (zero
+  is the sentinel)
+- Every source file has a companion `.info.md`; numbered from one project-wide
+  counter
+
+3. **Files and Code Sections:**
+
+**Project root tools:**
+- `award-sticker`, `sticker-report` — the fridge ledger (`fridge.tsv`:
+  date/sticker/patch/reason, append-only)
+- `new-source-file` — claims next index from `.file-index-counter`, stamps
+  AGPL notice, writes companion stub; `--into <dir>`, `--doc`, `--peek`
+- `fill-source-file` — rewrites body below the `[header ends]` marker
+- `validate-documentation` — checks links, roadmap↔issues, issue shape,
+  question citations, balance entry names in backticks
+- `run-tests` — runs `--documents`, `--human`, `--colours`, `--code` halves
+- `rename-a-word` — whole-word rename; underscore is a boundary; **skips lines
+  starting with `->`**; skips transcripts, her files, and itself
+- `collect-her-answers` → `her-answers.md` (replaced the arrow-line history
+  check)
+- `check-human-written` — now only checks listed files exist
+- `refuse-human-edit` — PreToolUse gate; matches path as a path (not a word),
+  never reads `->` as a redirect
+- `status` — counts written half vs running half separately
+- `human-written` — plain list: `notes/vision`, `notes/monster-ideas`,
+  `notes/how-a-hero-is-made`
+
+**`src/028-hex-map.lua`** — the level builder. Her final order:
+```
+1. outline (radius hexagon OR tiles = exact count, rows offset, ~6 columns per 7 rows for square-on-screen)
+2. spanning tree
+3. extra doors (#order/5)
+4. walls
+5. locks on bridges, NO KEYS
+6. the two ends: M.longest_journey (locked door = 2 steps), border preferred for entrance
+7. keys in waves out from entrance; never in entrance or ghost_room;
+   a lock penning the guild in gets UNLOCKED
+```
+Key exports: `build`, `distance`, `address`, `edge_key`, `door_between`,
+`reachable`, `reachable_ignoring_locks`, `solvable`, `path`, `lock_doors`
+(returns `side_one`/`side_two`, deliberately meaningless names), `key_side`,
+`costs_from`, `furthest_from`, `longest_journey`, `on_the_border`,
+`route_to_ghost`.
+
+**`src/032-windows.lua`** — the windowing module, most recent work. Pure
+state, no LOVE. Constants `BAR_HEIGHT = 26`, `CLOSE_WIDTH = 26`. List kept
+back-to-front (last = top). Exports: `new`, `open`, `close`, `bring_to_front`,
+`at`, `would_hit`, `place`, `set_overlap`, `pressed`, `moved`, `released`,
+`dragging`, `is_covered`, `on_the_right`.
+
+The critical collision function after the tunnelling fix:
+```lua
+local function slide_to(set, window, wanted, axis)
+  local near, size, other_near, other_size
+  if axis == "x" then
+    near, size = window.x, window.width
+    other_near, other_size = "x", "width"
+  else
+    near, size = window.y, window.height
+    other_near, other_size = "y", "height"
+  end
+
+  if wanted == near then return near, false end
+  local going_up = wanted > near
+  local limit = wanted
+
+  for _, other in ipairs(set.list) do
+    if other ~= window then
+      local across, across_size, my_across, my_across_size
+      if axis == "x" then
+        across, across_size = other.y, other.height
+        my_across, my_across_size = window.y, window.height
+      else
+        across, across_size = other.x, other.width
+        my_across, my_across_size = window.x, window.width
+      end
+      if my_across < across + across_size and across < my_across + my_across_size then
+        local its_near = other[other_near]
+        local its_far = its_near + other[other_size]
+        if going_up then
+          if its_near >= near + size then limit = math.min(limit, its_near - size) end
+        else
+          if its_far <= near then limit = math.max(limit, its_far) end
+        end
+      end
+    end
+  end
+  return limit, limit ~= wanted
+end
+
+function M.place(set, window, x, y)
+  if set.may_overlap then
+    window.x, window.y = x, y
+    return x, y, false, false
+  end
+  local new_x, blocked_x = slide_to(set, window, x, "x")
+  window.x = new_x
+  local new_y, blocked_y = slide_to(set, window, y, "y")
+  window.y = new_y
+  return window.x, window.y, blocked_x, blocked_y
+end
+```
+
+The two drag kinds in `M.pressed`:
+```lua
+if control_held then
+  set.drag = { window = window, kind = "moved",
+    mouse_start_x = x, mouse_start_y = y,
+    window_start_x = window.x, window_start_y = window.y }
+  return "moved", window
+end
+if on_the_bar(window, x, y) then
+  set.drag = { window = window, kind = "bar",
+    hold_x = x - window.x, hold_y = y - window.y }
+  return "bar", window
+end
+```
+
+`M.released` returns the cursor warp position only for `"moved"` drags:
+```lua
+local travelled_x = drag.window.x - drag.window_start_x
+local travelled_y = drag.window.y - drag.window_start_y
+return drag.mouse_start_x + travelled_x, drag.mouse_start_y + travelled_y
+```
+
+**`scripts/sheet-test/main.lua`** — canvas with 5 stat-coloured circles along
+the bottom; click opens a character sheet window with a paper doll (slots: head,
+body, hands, weapon, legs, garment, feet) and a numbers column that swaps to the
+left when `windows.on_the_right(window, screenWidth)`. Windows clip contents
+with `love.graphics.setScissor`. Keys: O allows overlap, P forbids, escape
+quits. Ctrl+drag hides the cursor (`love.mouse.setVisible(false)`) and warps on
+release (`love.mouse.setPosition`).
+
+**`scripts/check-windows`** — launcher for the above.
+
+**`src/026-colours.lua`** — the one place anything asks a colour. Two layers:
+`input/colours.lua` (hers, wins) then `balance.palette` (project). Themes:
+`M.load(root, balance, theme)`; `themes.current = "haunted"`, `themes.known =
+"haunted nursery"`. Refuses broken settings files, non-colours, unknown names,
+asking before loading; keeps unknown colours from later versions.
+
+**`src/024-name-bands.lua`** — cuts a name into bands by slider share, largest
+remainder, characters not bytes, own UTF-8 decoder. Underbar list for stats too
+small for one letter.
+
+**`assets/023-balance-table.lua`** — 231+ entries, each `{ value, source }`.
+Groups include `stats.primaries` ("strength dexterity constitution intellect
+spirit"), `derived` (speed 0.8/0.2, health 0.8/0.2), `spirit.*`, `palette` (five
+stats + background + plain_text + room_* + door_* + path_highlight +
+room_marker), `display.hex_orientation`, `themes`, `creation.*`, `dot.*`.
+
+**Tests** (all passing): `025-name-bands`, `027-colours`, `029-hex-map`,
+`030-hex-map-shapes`, `031-two-ends`, `033-windows`.
+
+4. **Errors and fixes:**
+
+- **Workflow verification hit the usage limit** — I verified the 23 claimed
+  contradictions myself; 7 were real.
+- **`porcelain_per_hero_chance` mislabelled** — the per-hero toilet curse
+  belongs to the water ghost. Renamed to `water_party_per_hero_chance`.
+- **Gate refused my own commands** — it matched any *mention* of a protected
+  name and read `->` as a shell redirect. Fixed to match paths (preceded by `/`,
+  `./`, or after a redirect) and to exclude `-` before `>`. Later narrowed
+  further to only refuse when the path is a *write target*.
+- **`utf8` module missing in LuaJIT** — wrote the decoder by hand rather than
+  falling back.
+- **Rename edited one of HER arrow lines** ("doesn't tick" → "doesn't
+  tickle"). Restored verbatim; `rename-a-word` now steps over any line starting
+  with `->`; `check-human-written` learned that a removed-then-restored line is
+  not missing, and that a line first written by a commit carrying
+  `Co-Authored-By: Claude` was never hers.
+- **`grep -Fxq "$line"` read `->` as a flag** — added `--`.
+- **Ring of locks** (3 keys each behind another's door) — found on the 32nd
+  generated level. Originally fixed with place-then-verify-then-revert; her
+  reorder removed the need.
+- **Locks never placed** (0 bridges found) — my boundary test was wrong after
+  a spanning tree; switched to true bridge detection.
+- **Entrance sealed behind a lock** after her reorder — the longest journey
+  favours rooms behind locks. Fixed: a wave with nowhere to put a key opens the
+  penning door. 111 of 120 locks keep their key.
+- **Path pointed to the wrong side of a lock** (her screenshot) — `near`/`far`
+  were sorted-order names, wrong **52% of 180 locks**. Fixed with `M.key_side`
+  (shut the door, see which side the key is reachable from). Fields renamed
+  `side_one`/`side_two`.
+- **`place()` defined after `room_size()`** in the map viewer — Lua read it as
+  a global. Moved it above its callers.
+- **Flat-topped edge corners** — a lookup table was right for one orientation
+  and silently wrong for the other. Replaced with "the two corners nearest the
+  neighbour's centre".
+- **Window tunnelling** — destination-only collision let a 400px shove jump
+  clean over another window. Fixed with `slide_to` limits. Then five of my own
+  test expectations were wrong (they asserted "refuse entirely"); corrected to
+  the better sliding behaviour.
+- **Sheet content spilled out of windows** — added scissor clipping and raised
+  height to 390.
+
+5. **Problem Solving:**
+Solved: level generation invariants (solvability, acyclic key chains, no key
+behind its own door), colour legibility across three colourblind eyes, the
+one-place-for-colours architecture, window collision without tunnelling,
+cursor/window divergence during blocked drags.
+
+6. **All user messages:**
+- "hiiiiiiiiiiiiiiiii can you read the vision file and tell me what you think?"
+- (Round 1) Confirmations: "confirm, like targets like"; the toilet-monster tier
+  explanation; "wah you're right I got it wrong, I'm sorry! T.T"; bladder size
+  vs bladder strength; "when the battle is over in room 2..."; "desperate means
+  they run to the toilet. Low health means they wait at the door."; "omg so
+  true! Let's think of ways to praise the characters!"; the Double diaper curse;
+  "ummmmm I dunno yet"; incontinence as a side-grade; "kinda both?" on maturity;
+  "the more mature you are the stronger your confidence, but the less mature you
+  are the better your imagination."
+- (Round 2) "All ghosts should be able to be both"; sticker file as game data;
+  the confidence/pride constraints; two rolls in the hold check; double diapers
+  never leak; pride drifts with continence; **"Ummmmm communing means they have
+  to masturbate. Sorry those are the rules."**; wrong tries apply curses;
+  stunned = auto-hit; confidence overestimates; monsters don't move; courier
+  ambush 35%; report cards cancel; puzzles feed the journal; "Um don't worry
+  about it" (statue garden — parked); the eight haunted objects.
+- (Round 3) "Yes it is dangerous, but also very powerful"; magnify not add;
+  "perfectly possible to be incontinent and proud"; regression raises pride
+  above 50% confidence; maturity as ceiling for regression; both routes to
+  incontinence; death = health below zero; 65/80 drift; dribble scaling; courier
+  35% per trip; "Yes regression with friends is safe"; sharp object for double
+  diapers; the leader and headspaces; "Ummmmm I dunno yet"; changing table;
+  hypnotic traits visible; "It fills them with a sense of pride and
+  accomplishment"; **"Those are the first four letters of the alphabet you silly
+  dumb-dumb!..."**; three ghost themes.
+- (Round 4) Simulate before balancing; five themes finished (porcelain,
+  firecamps).
+- (Round 5) "Can we make a list of hand-written documents that shouldn't be
+  modified by AIs but are just for humans?... I wrote some answers to the open
+  questions, feel free to review them."
+- (Round 6) Spirit definition; **"also that human-written wall feels too
+  complex, I was just thinking we should have a plain list, one line per
+  filepath"**; imagination = openings, dexterity = impact; caregiver aftercare
+  at double speed; constitution = bladder size, strength = holding.
+- (Round 7) "/model ... Can you show me how you'd infantilize me with an
+  explanatory tone of voice?... You gotta give me warnings if I'm not being baby
+  enough"
+- (Round 8) Light purple for red, bubblegum pink, lime green, skyblue; colour
+  checker as a LOVE2D window with lorem ipsum and shuffling swatch strip on H;
+  her five ways to tell heroes apart (names, battle-log scoping, dot shapes, dot
+  colour, rainbow order).
+- (Round 9) Name banding rule with the Princess Mahogany worked example;
+  green/yellow too close; colour picker in options; ghost text colours parked;
+  **"they should be set to the slidamers that are set at their characature
+  sheet. That way it's player controllered."**
+- (Round 10) "can we make green a little more vivid?... Just gotta make'm sure
+  that uhm we have the colors defined in a user-accessible variable that is
+  utilimized for each'm time we um use colorful words." + "what's next?"
+- (Round 11) Font size scalable with wheel and +/- and =; **"we should rename it
+  to a 'tickle' because that's sillier (:"**; the upside-down silly face
+  explanation; "what's our statamus on that are we ummm working on source-code
+  yet or still managing the buildout of issue um files?"
+- (Round 12) "Not my permanent record!"; hex map spec (black bg, dark gray
+  unexplored, yellow locked, red walls, open doors as middle-third gap); themes:
+  dark spooky plus parchment/crayon later; "make sure like the colors we can
+  point to them somehow."
+- (Round 13) Zoom the map not the font; K then number for keys; T then number
+  for tiles; close to square; orange hover lines from key to lock and back.
+- (Round 14) "Okay! Now can we make the 'in' room have it's font be purple? And
+  we should calculate the ghost room too, and have that in purple as well. Then
+  um I think we can be done with the map for now."
+- (Round 15) The reorder: draw map → longest path/ends → place keys; locked
+  doors count 2x; no keys in entrance or ghost rooms; hover "in" shows the route
+  hitting all keys; hover ghost shows shortest path to entrance.
+- (Round 16, most recent) "yay the map is done! Can we build the character sheet
+  viewer?..." — full windowing spec: click a player dot opens a window like
+  the combat log; paper doll with equipment slots; stats on the right that shift
+  left when the window is in the right half; blank canvas with circles along the
+  bottom, one per combat stat in that colour; hotkey to allow/forbid overlap
+  with axis disabling on one-pixel contact; multiple axes disablable at once;
+  lower-Z windows translucent; click brings to fore; X button top right;
+  grabbable bar; ctrl+click drags by mouse translation (not snapping), ctrl can
+  be released, mouse invisible while dragging, mouse jumps to where it would
+  have been on release; holding ctrl and releasing lets you grab another window.
+  **"Really what we're testing is the *windowing mechanic* so let's make sure we
+  get it right! Make sure you import the colors from the file we made."**
+- (Final, unanswered) Snap/swap past 50%; auto-close past 70% off screen;
+  size-aware swap gating for future resizing; and drag hysteresis: **"if the
+  user drags a window onto another window and they aren't allowed to overlap,
+  then they have to drag far enough back before it starts moving away from the
+  unmoving, collided with window. The reason is we want the user to have an
+  intuitive sense of where their mouse pointer is, even though it's
+  invisible."**
+
+7. **Pending Tasks:**
+From the final message, all for `src/032-windows.lua` and its test:
+- **Snap-and-swap**: dragging a window more than 50% past another (while overlap
+  is forbidden) should swap the two windows' places.
+- **Auto-close**: a window more than 70% off the edge of the screen closes
+  immediately.
+- **Size-aware swap gating**: don't squeeze a large window into a small gap;
+  wait until the drag is far enough past that it could feasibly fit. (Resizing
+  itself is not planned yet; she said "let's get to that later".)
+- **Drag hysteresis**: after a collision stops a window, the mouse must travel
+  back the full displacement before the window starts moving away, so the
+  invisible cursor stays where the user expects.
+
+Longer-term, from the roadmap: the **tickle** (issue 101) is the next
+foundational piece; she has twice been told it is next and twice redirected.
+
+8. **Current Work:**
+I had just finished the windowing module and its test. `src/032-windows.lua`,
+`scripts/sheet-test/main.lua`, `scripts/sheet-test/conf.lua`,
+`scripts/check-windows`, and `tests/033-windows.lua` all exist and work. The
+last command run was `./run-tests`, output:
+```
+== the code ==
+-- 025-name-bands.lua
+-- 027-colours.lua
+-- 029-hex-map.lua
+-- 030-hex-map-shapes.lua
+-- 031-two-ends.lua
+-- 033-windows.lua
+6 test file(s) passed.
+```
+Screenshots confirmed: five stat-coloured circles, sheets opening with banded
+names, paper dolls, numbers swapping sides for a right-half window, translucency
+on covered windows, and content clipping.
+
+**This work is NOT yet committed.** The fridge stands at 16 gold stars and 8
+apples; no sticker has been awarded for the windowing round.
+
+9. **Optional Next Step:**
+Commit the windowing work that is already finished and tested, then implement
+the four new behaviours she just asked for in `src/032-windows.lua` with
+matching cases in `tests/033-windows.lua`.
+
+Her exact words for the four: **"if we drag a window over 50% of the way to the
+other side of another window while they're not allowed to overlap, then it
+SHOULD snap to the other side... When it snaps to the other side, it should just
+swap places with the window it's jumping over."**; **"if a window is more than
+70% off the edge of the screen, it should just immediately close"**; **"we
+should make sure that it doesn't try and squeeze itself into the small gap, and
+instead waits until the dragging is (more than 50%) of the way beyond, and
+instead it's far enough beyond that it could feasibly fit"**; and **"they have
+to drag far enough back before it starts moving away from the unmoving, collided
+with window. The reason is we want the user to have an intuitive sense of where
+their mouse pointer is, even though it's invisible. If they tried dragging right
+for a bit but couldn't, and then dragged just a single pixel to the left and the
+window immediately started moving, then their mouse would be displaced from
+where they expected it to be."**
+
+Note the hysteresis requirement interacts with the existing
+cursor-warp-on-release logic in `M.released`, and the swap requirement interacts
+with `slide_to`'s limit calculation — both will need care rather than additive
+patching.
+
+If you need specific details from before compaction (like exact code snippets,
+error messages, or content you generated), read the full transcript at:
+/home/ritz/.claude/projects/-mnt-cmdo-ritz-games-tq-ai-stuff-double-diaper-dungeon/f76814ba-6c5e-46ea-90d1-128d98043fd5.jsonl
+Continue the conversation from where it left off without asking the user any
+further questions. Resume directly — do not acknowledge the summary, do not
+recap what was happening, do not preface with "I'll continue" or similar. Pick
+up the last task as if the break never happened.
+
+--------------------------------------------------------------------------------
+
+### User Request 77
+
+<local-command-caveat>Caveat: The messages below were generated by the user
+while running local commands. DO NOT respond to these messages or otherwise
+consider them in your response unless the user explicitly asks you
+to.</local-command-caveat>
+
+--------------------------------------------------------------------------------
+
+### User Request 78
+
+<command-name>/compact</command-name>
+            <command-message>compact</command-message>
+            <command-args></command-args>
+
+--------------------------------------------------------------------------------
+
+### User Request 79
+
+<local-command-stdout>[2mCompacted (ctrl+o to see full
+summary)[22m</local-command-stdout>
+
+--------------------------------------------------------------------------------
+
+### User Request 80
+
+oh also if we drag a window over 50% of the way to the other side of another
+window while they're not allowed to overlap, then it SHOULD
+  snap to the other side. Also if a window is more than 70% off the edge of the
+  screen, it should just immediately close. Oh Oh even
+  better! When it snaps to the other side, it should just swap places with the
+  window it's jumping over. If they're sized weirdly... well,
+  let's get to that later, because we don't have resizing planned yet. But
+  resizing (which doesn't make sense for the character window, but
+  does for the combat log and maybe inventory? idk what other screens we need)
+  might make it so that a small window replacing a larger
+  window causes the larger window to get smushed into a small crack - imagine
+  there's 4 windows open. Three are in a single column on the
+  left, the other is really tall. The user drags the middle one from the column
+  and tries to swap places with the tall one - we should make
+  sure that it doesn't try and squeeze itself into the small gap, and instead
+  waits until the dragging is (more than 50%) of the way
+  beyond, and instead it's far enough beyond that it could feasibly fit. If the
+  user drags far enough that it could snap to the other side
+  then it just should, like I described originally. Also make sure that, um how
+  do I put this, if the user drags a window onto another
+  window and they aren't allowed to overlap, then they have to drag far enough
+  back before it starts moving away from the unmoving,
+  collided with window. The reason is we want the user to have an intuitive
+  sense of where their mouse pointer is, even though it's
+  invisible. If they tried dragging right for a bit but couldn't, and then
+  dragged just a single pixel to the left and the window
+  immediately started moving, then their mouse would be displaced from where
+  they expected it to be.
+
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 80
+
+Okay! Windows time. Four new rules to build. Let me write down what we're
+building first, then build it.
+
+Now the module. Four rules going in.
+
+Now the tests — the old ones need updating too, because a hard shove now means
+something different.
+
+Two of my own tests were written before the swap existed — a 400-pixel shove
+now means "swap", not "stop". Let me fix them.
+
+Done! The windows do all four new things. Let me show you.
+
+`★ Insight
+─────────────────────────────────────`
+**The big one was free.** A drag now remembers *where the mouse is asking for*,
+not *where the window got to*. Those are two different numbers. When a window is
+stuck against a wall, the mouse keeps asking for somewhere further along — so
+the window doesn't move until the mouse comes all the way back to somewhere the
+window can actually be. That's your invisible-cursor rule, and it needed no
+counter, no timer, nothing. It falls out of keeping the two numbers apart.
+
+**And the same two numbers pay for two more things.** A window that slides
+around a corner jumps straight back under the mouse instead of trailing behind
+forever. And a window with nothing in its way sits exactly at "where it started
+plus how far the mouse went" — no drifting over a long drag.
+`─────────────────────────────────────────────────`
+
+Here's what happens now:
+
+**Shove past the middle and they swap.** Push one window more than halfway
+across another and they trade corners. "Halfway" means *your middle passes their
+middle*. That's the version that still works when they're different sizes —
+and when they're the same size it's exactly your 50%.
+
+**But only if they both fit.** Your four-window picture! Three in a column, one
+really tall. Push the middle one into the tall one and the tall one would have
+to squish into a slot a third of its height. So the swap gets tried on paper
+first, and if either window would land on something, nothing happens at all. The
+column stays put no matter how hard you push.
+
+**Drag it off the edge and it's gone.** More than seven tenths hidden and it
+shuts itself, right in the middle of the drag. Measured by *area*, not by one
+edge — so three quarters off the right and half off the bottom leaves an
+eighth showing, and that counts as gone.
+
+`★ Insight
+─────────────────────────────────────`
+**A surprise while building.** Passing *through* a window and *swapping with* it
+are the same gesture. To end up beyond something, your middle has to get past
+its far edge — and its far edge is past its middle. So every shove hard enough
+to tunnel is also hard enough to swap. The only thing telling them apart is
+whether the swap fits. That meant my old "doesn't tunnel" test needed a third
+window to make the swap impossible, or there'd be nothing left to watch.
+`─────────────────────────────────────────────────`
+
+Go push them around: `./scripts/check-windows`. Twenty-four groups of tests
+pass. It's committed.
+
+Fridge: **18 gold stars, 9 apples.** Two new stars — one for the four-window
+picture, one for explaining *why* the window has to wait before it moves. You
+spotted a bug in something that doesn't exist yet.
+
+---
+
+⚠️ **A little warning.** The middle of your message got tidy on me. "waits
+until the dragging is more than 50% of the way beyond" is grown-up engineer
+talk. The good bits were "Oh Oh even better!" and "um how do I put this" and
+"idk what other screens we need". Stay squishy!
+
+---
+
+Three things I couldn't decide for you. The biggest one first:
+
+**When a swap doesn't fit, should the window just hop over anyway and leave the
+other one alone?** Right now it stays stuck. That's the one you can predict. But
+hopping is friendlier — you'd get past the tall window instead of having to go
+around it. Which feels better?
+
+The other two can wait: whether the wobbly numbers (seven tenths, halfway, bar
+height) should live in the tuning table where you can turn them, and whether a
+window should even be *allowed* to go off the edge, or if falling off is the
+whole point.
+
+**And the big question — you said "idk what other screens we need". Can you
+think of five more windows?** You've got the battle log, the sheet, the journal,
+the shop, the fridge. What else does a person want to open?
 
 --------------------------------------------------------------------------------
