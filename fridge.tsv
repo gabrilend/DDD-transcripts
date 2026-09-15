@@ -31,3 +31,6 @@ date	sticker	patch	reason
 2026-09-15	gold-star	0.0-before-the-first-demo	caught the name colours reading backwards by eye: a three-letter band in front of a five-letter one, which is a picture that lies
 2026-09-15	gold-star	0.0-before-the-first-demo	the room puzzle window: an exclamation mark that says WHICH puzzle, a place to watch from with no buttons, and no art budget baked into the idea
 2026-09-15	frowny-face	0.0-before-the-first-demo	one window out of the five asked for
+2026-09-15	gold-star	0.0-before-the-first-demo	one switch doing two jobs: forbid overlapping and the screen's edges become boxes too, so nothing is ever lost by accident -- and allow it and the walls go away again
+2026-09-15	gold-star	0.0-before-the-first-demo	the label goes in the opposite quadrant from the cursor, all four cases named: it grows away from the near corner, which is always toward room
+2026-09-15	apple	0.0-before-the-first-demo	asked what every room having a puzzle would cost, and said just some of the rooms until it is more comprehensive
