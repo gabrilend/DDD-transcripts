@@ -34,3 +34,7 @@ date	sticker	patch	reason
 2026-09-15	gold-star	0.0-before-the-first-demo	one switch doing two jobs: forbid overlapping and the screen's edges become boxes too, so nothing is ever lost by accident -- and allow it and the walls go away again
 2026-09-15	gold-star	0.0-before-the-first-demo	the label goes in the opposite quadrant from the cursor, all four cases named: it grows away from the near corner, which is always toward room
 2026-09-15	apple	0.0-before-the-first-demo	asked what every room having a puzzle would cost, and said just some of the rooms until it is more comprehensive
+2026-09-15	gold-star	0.0-before-the-first-demo	the print is a second axis, not decoration: a sparkly tiara and a sparkly unicorn tiara are two different tiaras, and the difference is important
+2026-09-15	gold-star	0.0-before-the-first-demo	fifty words when five were asked for, with the rules baked in: notched is weapons only, plain is half the time, and no cops on the job print
+2026-09-15	gold-star	0.0-before-the-first-demo	four dinosaur prints instead of one -- dinosaurs, lots of dinosaurs, too many dinosaurs, and just one dinosaur -- because the joke is the gradation
+2026-09-15	retract-frowny	0.0-before-the-first-demo	the windows keep arriving: the pack is one, the little stat picker beside the bar is another
