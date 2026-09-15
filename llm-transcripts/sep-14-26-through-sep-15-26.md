@@ -1,6 +1,6 @@
 # Conversation Summary: f76814ba-6c5e-46ea-90d1-128d98043fd5
 
-Generated on: 2026-09-15 14:47:41
+Generated on: 2026-09-15 14:54:25
 
 --------------------------------------------------------------------------------
 
@@ -4429,5 +4429,78 @@ decided.
 
 54 answers in there right now. Your reasoning was the right one: a thing you
 read is more use than a thing that tells you off.
+
+--------------------------------------------------------------------------------
+
+### User Request 71
+
+Okay! Now can we make the "in" room have it's font be purple? And we should
+calculate the ghost room too, and have that in purple as well. Then um I think
+we can be done with the map for now.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 71
+
+Purple labels are easy. Calculating the ghost room means finally building your
+longest-journey rule, which is the real thing.
+
+Look at seed 1: the way in and the ghost room are **next door to each other**,
+and 77 effort apart because a locked door sits between them with its key across
+the level. Your rule earning itself.
+
+Both ends in purple, both on the border. They look adjacent, and they are: there
+is a **wall** between them, so the walk around is the longest on the level. Let
+me test that properly.
+
+That last line is the important one: **26 of 30 levels** put the ghost somewhere
+a plain door count would not. Your rule genuinely reshapes the level. Let me
+make one test honest, though, because I wrote it lazily.
+
+Done, and the map is finished for now. **Fifteen gold stars and eight apples.**
+
+Both ends are purple, with the word in the room saying which is which. Look at
+the picture above: **"in" and "ghost" are next door to each other**, and that is
+correct. There is a wall between them, so the walk around is the longest on the
+level.
+
+★ Insight
+─────────────────────────────────────
+Your longest-journey rule earns its keep, and I can show you the number. On **25
+levels out of 30**, pricing the locked doors puts the ghost somewhere a plain
+door count would not have chosen.
+The reason is your arithmetic: a locked door costs the step through it **plus
+twice the walk to its key**, five there and five back. So a room three doors
+away with a key fetch behind it can be further than a room fifteen doors away in
+the open. The ghost ends up guarded rather than merely distant, which is a
+different and better thing.
+─────────────────────────────────────────────────
+
+**One thing I had to decide, and it is the sort that breaks silently.** The two
+ends have to be found **before** the locks go in.
+
+★ Insight
+─────────────────────────────────────
+A key is placed on the side of its lock **the party is already on**. And the
+side the party is already on is the side the way in is on.
+So if I placed the locks from some arbitrary room and then declared an entrance
+somewhere else, the guild could arrive **behind** a door whose key is on the far
+side. The level would look completely ordinary. Every room drawn, every door
+drawn, and no way to finish it.
+The order is therefore: find the ends by plain steps, put the locks in from the
+way in, then find the ghost room **again** with the locks priced. The way in
+cannot move on that second pass, because a door has already been locked against
+it. There is a test whose whole job is to catch that if anyone ever reorders it.
+─────────────────────────────────────────────────
+
+Five test files now, and all of them pass.
+
+**Where we stand:** four source files, 2059 lines, five tests, and a map you can
+look at, turn, resize, and ask questions of. Nothing else of the game runs yet.
+
+So the map is done for now. The next thing is the one it has been waiting for:
+**the tickle**, the heartbeat everything else counts in. After that, rooms start
+filling with monsters and the map stops being a picture and starts being a
+place.
 
 --------------------------------------------------------------------------------
