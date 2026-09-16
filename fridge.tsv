@@ -46,3 +46,6 @@ date	sticker	patch	reason
 2026-09-15	gold-star	0.0-before-the-first-demo	one window abstraction for all of them, so the frame is not written out again every time. It had already been duplicated twice and had already drifted
 2026-09-15	apple	0.0-before-the-first-demo	keys must not sit beside the door they open, with the distance named: at least two rooms between
 2026-09-15	gold-star	0.0-before-the-first-demo	who may dress whom: a hero equips only automatically, the leader only by hand. The leader is the player and a hero is not, so there is nobody inside the leader to decide and somebody inside a hero
+2026-09-15	gold-star	0.0-before-the-first-demo	relic slots grow: three, and one more per level conquered. A flat number is a setting; a number that grows is a reason to go down, and the easy level is a real option rather than a worse one
+2026-09-15	gold-star	0.0-before-the-first-demo	modifiers are not bonuses, said in a bracket so it could not be guessed wrong -- one system for every kind of word, with a different data model behind each
+2026-09-15	apple	0.0-before-the-first-demo	sharp and solid, with the examples: swords and arrows sharp, staves and maces solid

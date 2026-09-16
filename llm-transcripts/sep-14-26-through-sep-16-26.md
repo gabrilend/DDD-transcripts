@@ -1,6 +1,6 @@
 # Conversation Summary: f76814ba-6c5e-46ea-90d1-128d98043fd5
 
-Generated on: 2026-09-15 18:17:17
+Generated on: 2026-09-15 19:32:05
 
 --------------------------------------------------------------------------------
 
@@ -5970,5 +5970,91 @@ way gear goes on.
 
 **Should you be able to overrule them?** Drag a piece onto a slot yourself, and
 they wear it even though their sliders say they'd rather not?
+
+--------------------------------------------------------------------------------
+
+### User Request 86
+
+ummmmmm no. But the hero needs to be able to equip gear, so also yes! We'll need
+to have separate windows for the leader, and the adventurers. The leader can
+only equip relics, and only manually. The heroes can equip equipment (go figure)
+and can only do it automatically.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 86
+
+A clean split. Let me check what the design already says about relics and the
+leader.
+
+One header overlaps another. Fixing, then wrapping up.
+
+"No, but also yes" turned out to be the right answer. **Press L.**
+
+`★ Insight
+─────────────────────────────────────`
+You didn't compromise — you **split it by who's inside**.
+
+| | Wears | Chosen by |
+|---|---|---|
+| a hero | equipment | **themselves**, never the player |
+| the leader | relics, nothing else | **the player**, never automatically |
+
+And the reason they're exact opposites is the good part: **the leader is you,
+and a hero isn't.** There's nobody inside the leader to make the choice. There
+*is* somebody inside a hero.
+
+That fits everything else this game already does. The heroes pick which room to
+walk into, when to go to the toilet, whether to hold on. Their gear is the same
+kind of decision. A game where you reach into someone's pack and put a hat on
+them is a game where they're puppets — and the sliders are a better handle
+anyway: you say what they should *care about* and watch them act on it.
+`─────────────────────────────────────────────────`
+
+It also split something that used to be one thing:
+
+`★ Insight
+─────────────────────────────────────`
+**Owning a relic and wearing one are now two different things.** The design had
+the guild just *hold* relics and all the bonuses applied. But "equip manually"
+only means something if there are slots — so now the guild owns everything it
+finds, the leader wears three, and **a relic you own but don't wear does nothing
+at all.**
+
+That's what makes placing them a decision instead of a formality.
+`─────────────────────────────────────────────────`
+
+Drop a relic on Princess Mahogany and she refuses it *out loud* — "a relic is
+the leader's; a hero cannot wear one." Not a silent nothing. **A control that
+does nothing is a control a person keeps trying.**
+
+I also fixed a small thing I spotted in the screenshot: two column headings were
+running into each other and came out reading "with gearbare". 🙃
+
+**Fridge: 31 gold stars, 12 apples, no frownies.** ⭐
+
+---
+
+I marked **three** things as placeholders and said so loudly, because they're
+all yours and I don't want them quietly becoming real:
+
+1. **The relic list.** I made up eight — *The First Blanket, A Mother's
+   Thimble, The Unfinished Lullaby, The Last Alphabet Block, A Tooth Kept In
+   Cotton, The Chipped Saucer, One Very Old Ribbon, Grandfather's Whistle.*
+   Placeholders.
+2. **What relics boost.** I used the five hero stats, but the leader's own stat
+   list is one you answered "I dunno yet" to.
+3. **How many slots.** I guessed three.
+
+**That last one is the real question, and it's bigger than it looks.**
+
+**How many relic slots should the leader have?**
+
+One slot means there's no choice — you just wear the best one. Six means
+there's no choice either — you wear everything you own. Somewhere in the
+middle is where it becomes *"which three?"*, and that number is the whole of how
+much a run's relic luck you actually get to steer.
+
+Three? Two?
 
 --------------------------------------------------------------------------------
