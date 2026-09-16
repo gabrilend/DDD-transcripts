@@ -52,3 +52,37 @@ date	sticker	patch	reason
 2026-09-15	gold-star	0.0-before-the-first-demo	not in ~/.local -- pictures of this project were piling up in a hidden folder nobody would look in, and she noticed before anybody had to go looking for one
 2026-09-15	apple	0.0-before-the-first-demo	one weapon, not two; and both kinds of number in the tooltip
 2026-09-15	apple	0.0-before-the-first-demo	what the detour costs: time, and all the other supplies
+2026-09-16	gold-star	0.0-before-the-first-demo	a whole stat-growth mechanism typed out with worked numbers, and she spotted the vanilla-to-Burning-Crusade rating problem inside her own design before anyone told her
+2026-09-16	gold-star	0.0-before-the-first-demo	unbounded stats, and she was willing to throw out the dice analogy entirely to get them
+2026-09-16	gold-star	0.0-before-the-first-demo	levels give classes and not stats, with the ability list right there: passives, auras, periodic effects, chance on hit, auto-cast buffs and debuffs
+2026-09-16	gold-star	0.0-before-the-first-demo	the heroes scale up and the monsters scale up harder, and what ends a run is the floors running out before the ghosts do
+2026-09-16	apple	0.0-before-the-first-demo	both ladders are per stat
+2026-09-16	apple	0.0-before-the-first-demo	imagination softens the drop linearly, and a warning that regression is a narrow 0-to-100 window so nothing reading it may scale exponentially
+2026-09-16	apple	0.0-before-the-first-demo	confirmed the split at the hundreds, and settled that the 1% base is always there with strength paying on top of it
+2026-09-16	gold-star	0.0-before-the-first-demo	the draw-without-replacement deck, five percent per card, with half the picks left random so a stat nobody points at still grows
+2026-09-16	gold-star	0.0-before-the-first-demo	a level ten thousand person does not learn ten thousand times more from an experience than a level one person, and usually it is the other way round, and most games get this backwards
+2026-09-16	gold-star	0.0-before-the-first-demo	experience comes from being cared for by a caregiver, and from going through a submissive or dominant experience, so the subject of the game is also how a hero advances
+2026-09-16	apple	0.0-before-the-first-demo	yes to strength and spirit both feeding growth through different doors
+2026-09-16	apple	0.0-before-the-first-demo	monsters are not persistent characters and nobody knows what is in a room until the heroes queue up at the door
+2026-09-16	gold-star	0.0-before-the-first-demo	told me no when I asked for five more encounter kinds, and said why: everything stays a fight or a puzzle, and the variety goes into the puzzles so the game stays constrained
+2026-09-16	gold-star	0.0-before-the-first-demo	spotted that the combat avoidance value is the same machine as the growth ladder, unprompted, and asked whether there were more
+2026-09-16	apple	0.0-before-the-first-demo	liked the single forty-card deck better than the coin flip plus deck
+2026-09-16	apple	0.0-before-the-first-demo	both sides of a caregiving and both sides of a submissive or dominant experience earn the experience
+2026-09-16	apple	0.0-before-the-first-demo	a hero's worst moments pay experience too, so an accident in front of everyone is also how she grows
+2026-09-16	apple	0.0-before-the-first-demo	corrected me about the sliders: the plus and minus buttons mean a hero can be a hundred percent of one stat
+2026-09-16	gold-star	0.0-before-the-first-demo	ruled that bladder capacity reads the raw constitution and not the penalised one, and worked it out with the maggot steak: being sick from smells might make you puke at something you would otherwise walk past, but it does not make your bladder smaller
+2026-09-16	gold-star	0.0-before-the-first-demo	hypnotic triggers never go away, and invented the hypnotist: a role like a caregiver who stuns enemies and works a hero through the triggers the daycare put in her, with a focused therapy session being the only thing that takes a stack off
+2026-09-16	apple	0.0-before-the-first-demo	strength keeps the growth engine for now and the effective value of each stat gets judged at the balance pass, when the thing can actually be played with
+2026-09-16	gold-star	0.0-before-the-first-demo	caregiving and hypnotism are skills hanging off classes with stat requirements, checked at the moment the class develops, and a hero who does not qualify gets a different class with something else in its place instead of an empty slot
+2026-09-16	gold-star	0.0-before-the-first-demo	a hero who is not susceptible will not agree to a therapy session, and a hero full of triggers with very low confidence will not ask for one either, because low confidence means she does not trust herself or anyone else
+2026-09-16	apple	0.0-before-the-first-demo	therapy sessions happen at a basecamp and nowhere else
+2026-09-16	apple	0.0-before-the-first-demo	some classes carry the offensive abilities and some carry the restorative ones, so stunning a monster and mending a friend are not one role
+2026-09-16	gold-star	0.0-before-the-first-demo	paired classes: every stat profile gets a high-maturity version and a low-maturity version, they need not resemble each other, and the names come in two registers -- mailman and doctor and scientist and lawyer and teacher against ravensworn and sacred blade and eternal serene and fighter and cleric and footman
+2026-09-16	apple	0.0-before-the-first-demo	hypnotism has an intellect build and a spirit build
+2026-09-16	gold-star	0.0-before-the-first-demo	classes develop into each other and it is a journey -- you are an apprentice before you are a carpenter, and the same goes for every shape in the catalogue
+2026-09-16	gold-star	0.0-before-the-first-demo	dexterity is flexibility, and mental flexibility is the same skill: you have to adapt to someone else's mind while you are adjusting it
+2026-09-16	gold-star	0.0-before-the-first-demo	the restorative half is not hypnosis at all but monk mantras, and it leans on high spirit and high constitution
+2026-09-16	apple	0.0-before-the-first-demo	noticed that intellect is an outward stat like strength and dexterity while spirit is an inward one like constitution
+2026-09-16	gold-star	0.0-before-the-first-demo	classes are read off the stats a hero actually has with her gear taken off, not off the sliders -- which usually points where the sliders were aimed, but not always
+2026-09-16	gold-star	0.0-before-the-first-demo	four dexterity pairings at once: dex and int is the hypnotist, dex and con is the monk, dex and spirit is the juggler, dex and strength is the acrobat or the ballerina
+2026-09-16	apple	0.0-before-the-first-demo	class and job mean the same thing and are interchangeable -- mature classes are jobs, immature jobs are classes, and it does not need worrying about
