@@ -1,6 +1,6 @@
 # Conversation Summary: f76814ba-6c5e-46ea-90d1-128d98043fd5
 
-Generated on: 2026-09-15 16:45:56
+Generated on: 2026-09-15 16:53:47
 
 --------------------------------------------------------------------------------
 
@@ -5724,5 +5724,119 @@ good, which feels wrong.
 
 **Should mithril just BE better?** So finding a mithril anything is exciting,
 and bronze is what you start in?
+
+--------------------------------------------------------------------------------
+
+### User Request 84
+
+> ⚠️ One thing your 5% rule costs, and you should know: three stats can
+> never be level. A third of 100 isn't a whole number of fives. So a three-tab
+> hero never gets a three-colour rainbow, no matter what. Two, four and five all
+> still work, and five is the default — but three is just
+>   out. Is that okay?
+
+oh, um... how about if they're within 5% then they count as being "equal" for
+the purposes of rainbows?
+
+> One question. You gave me four metals in an order: bronze, iron, steel,
+> mithril. That's not a random order — that's a ladder.
+>
+> Right now metal is just a word. A bronze helmet and a mithril helmet are
+> equally good, which feels wrong.
+>
+> Should mithril just BE better? So finding a mithril anything is exciting, and
+> bronze is what you start in?
+
+
+Yeah! And we should order the adjectives such that better adjectives are more
+powerful. Like sparkly is lovely! But funky is not :(
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 84
+
+Two good calls. The 5% tolerance is cleaner than you might think — let me show
+you why.
+
+Now the ladders. Every adjective and metal gets a rank.
+
+Both in, and both of them were better ideas than you probably realised.
+
+**Your 5% rule works, and it's not a fudge.**
+
+`★ Insight
+─────────────────────────────────────`
+Two rounds ago I told you a tolerance was a *bad* idea, because "close enough is
+equal" breaks: A equals B, B equals C, but A doesn't equal C. So I was braced to
+be careful here.
+
+**But yours doesn't do that**, because of where you measured from. "Within 5%"
+of *the biggest one* is a threshold from a single place — there are no pairs
+left to disagree. And since the bar already moves in notches, "within 5%" is
+exactly "within one notch", which is whole-number arithmetic with nothing to
+round.
+
+You got the safe version by accident of phrasing. Three even tabs stripe now.
+Look at the dot. 🌈
+
+(And a chain still behaves: 30/25/20/15/10 stripes only the top two, because the
+third is *two* notches from the leader even though it's one from the second.)
+`─────────────────────────────────────────────────`
+
+**And "sparkly is lovely but funky is not" was the biggest idea in the
+message.**
+
+`★ Insight
+─────────────────────────────────────`
+I asked about metals. You said yes *and* extended it to the adjectives, which I
+hadn't thought of — and that second half is what changed the game.
+
+Because now **the name of a thing IS its stat line**:
+
+```
+Gilded Gold Sapphire Necklace        ← obviously a treasure
+Colorful Mithril Emerald Signet      ← obviously good
+Crooked Dinosaur Skirt               ← obviously junk
+Rickety Just-One-Dinosaur Shoes      ← junk, best name in the game
+```
+
+You can read a full pack at a glance with no numbers drawn anywhere. That's a
+whole UI you didn't have to build, and it came out of one sentence about funky.
+
+**It also creates a rule to protect**, which is why the ranks live right next to
+the words rather than in a numbers table: if "Threadbare" ever outranks
+"Gilded", the names stop meaning anything — and nobody would spot that by
+reading a column of numbers.
+`─────────────────────────────────────────────────`
+
+How it works: the adjective's rank plus the metal's rank is a **budget**, shared
+out across whatever the piece is good at. So being good at three things means
+being a *little* good at each — that's a trade, not a freebie, and your
+sliders are exactly the question of which you want.
+
+**Mithril skips a rung** — steel is 3, mithril is 5. Iron to steel is an
+upgrade. Steel to mithril is a story.
+
+And **cloth starts higher with no metal to add.** So the worst helmet is worse
+than the worst shirt, and the best helmet beats everything. Clothes have a
+reason to exist at the start of a run instead of being what you haven't replaced
+yet.
+
+---
+
+**Fridge: 27 gold stars, 11 apples, no frownies.** 🌟
+
+---
+
+**One little question, and it's a "should I stop here?" one.**
+
+Jewellery has a metal *and* a stone. I ranked the metals — copper, silver,
+gold, mithril. But I **left the stones alone**: ruby, sapphire, emerald, amber,
+pearl, opal, quartz, moonstone are all just words.
+
+You asked for two ladders and you got two. A third would mean a necklace's name
+makes *two* separate promises about how good it is, which might be one too many.
+
+**Should the stones be a ladder too, or is two enough?**
 
 --------------------------------------------------------------------------------

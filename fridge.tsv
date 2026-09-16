@@ -41,3 +41,7 @@ date	sticker	patch	reason
 2026-09-15	gold-star	0.0-before-the-first-demo	fixed the three-stat rainbow in one sentence: within 5% counts as equal. Measured from the biggest rather than between pairs, so it is exact rather than a fudge
 2026-09-15	gold-star	0.0-before-the-first-demo	sparkly is lovely but funky is not -- which turns the name of a thing into its stat line, so a full pack can be read without a single number in it
 2026-09-15	apple	0.0-before-the-first-demo	said yes to mithril being better, and extended it to the describing words without being asked
+2026-09-15	gold-star	0.0-before-the-first-demo	threadbare should only go on clothing -- which needed a whole notion of families the words did not have, and which a threadbare ring makes obvious the moment it is said
+2026-09-15	gold-star	0.0-before-the-first-demo	the gemstone says what the jewellery is FOR, not how good it is -- which answers a better question than the one that was asked, and gives jewellery a shape of its own
+2026-09-15	gold-star	0.0-before-the-first-demo	one window abstraction for all of them, so the frame is not written out again every time. It had already been duplicated twice and had already drifted
+2026-09-15	apple	0.0-before-the-first-demo	keys must not sit beside the door they open, with the distance named: at least two rooms between
