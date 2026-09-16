@@ -1,6 +1,6 @@
 # Conversation Summary: f76814ba-6c5e-46ea-90d1-128d98043fd5
 
-Generated on: 2026-09-15 16:53:47
+Generated on: 2026-09-15 18:17:17
 
 --------------------------------------------------------------------------------
 
@@ -5838,5 +5838,137 @@ You asked for two ladders and you got two. A third would mean a necklace's name
 makes *two* separate promises about how good it is, which might be one too many.
 
 **Should the stones be a ladder too, or is two enough?**
+
+--------------------------------------------------------------------------------
+
+### User Request 85
+
+threadbare (and similar) should only go on clothing. Not metal gear or weapons
+or jewelry.
+
+the gemstone should determine which attribute it boosts, and jewelry should ONLY
+boost that attribute.
+
+Can you make sure the inventory does the correct snapping behavior? We should
+make a window abstraction that all windows inherit from that handles the
+snapping and the transparency and all that, so we don't have to duplicate it
+each time.
+
+Also can you make sure, for the map demo, that keys don't spawn next to the room
+they unlock? There should be at least two rooms between them...
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 85
+
+Four things. Let me start with the words.
+
+Now the map: keys must be two rooms away from their lock.
+
+Noted — paper doll, tooltips, and gear on the sheet. Adding those. Finishing
+the key rule first.
+
+The entrance is sometimes penned into two rooms. That's a level-shape problem,
+not a key problem.
+
+Zero keys too close, zero compromises, across 300 levels. Let me make sure the
+rest of the map still holds.
+
+Now the shared window frame she asked for, plus a paper doll both demos can use.
+
+Now rewiring both benches onto the frame, with a doll and tooltips.
+
+The frame's refusal caught a real omission — the sheet bench never set a kind.
+
+No interruption at all — everything's in. Six things, all done.
+
+**Threadbare is for clothing.** That one needed a whole new idea: things now
+belong to **families** — cloth, metal, jewellery, weapon — worked out from
+what a thing *is* rather than written on all sixty-odd of them. Threadbare,
+velvet, quilted, poofy, sequined, fuzzy, woven, starched, twice-mended, plush
+and squishy are cloth now. Notched moved onto the same mechanism, so there's one
+way of saying it instead of two.
+
+**The stone says what jewellery is FOR.** Ruby→strength, emerald→dexterity,
+amber and pearl→constitution, sapphire and quartz→intellect, opal and
+moonstone→spirit.
+
+`★ Insight
+─────────────────────────────────────`
+I asked whether stones should be a *third ladder* and you answered a better
+question. The stone isn't another measure of how **good** a thing is — it's
+what the thing is **about**.
+
+That gives jewellery a shape of its own instead of being a shirt with a smaller
+number: **cloth and armour spread their strength over one to three attributes;
+jewellery puts all of it in one.** So a hero who knows exactly what they want
+wants jewellery, and a hero who's spread wants a shirt. That's a real choice,
+not one number being bigger.
+`─────────────────────────────────────────────────`
+
+**One window abstraction**, exactly as you said. You were right that it was
+already duplicated — two benches each drew their own frame, bar, cross and
+clipping, and they'd *already drifted*. Now there's one place that knows what a
+window looks like.
+
+`★ Insight
+─────────────────────────────────────`
+The split it settles is the one the whole game will follow:
+- **state** (rectangles, stacking, snapping, what's covered) — stays where it
+  was, it's arithmetic
+- **look** (frame, bar, cross, see-through, clipping) — one file
+- **contents** (heroes, packs) — whoever knows about those
+
+And a window kind with no drawing row is an **error**, not a blank rectangle. It
+caught one the same day: the older bench's windows had no kind at all and had
+been working by accident. 🎣
+`─────────────────────────────────────────────────`
+
+**The paper doll** is its own file — all eleven slots, hoverable, in *both*
+demos. Hover any slot for a label, same box the pack uses. **And gear shows on
+the sheet now**: each attribute as it comes to with everything worn, bare value
+beside it, and speed and health following underneath because they're mixtures of
+the attributes above them. Put on a helmet and two numbers you didn't touch go
+up.
+
+---
+
+**The keys were the hard one, and it took a real fix.**
+
+`★ Insight
+─────────────────────────────────────`
+Measuring was easy. The problem was that **one key in eight** still landed too
+close, and they nearly all came from *one shape*: the way in landing in a
+**two-room pocket** on a fifty-room level. Nowhere further to put anything.
+
+I tried deferring those locks to a later round. Didn't help — the region only
+grows *when a key is placed*, so waiting is waiting forever.
+
+What worked was noticing that **a pocket too small to hold a key properly is the
+same problem as a pocket with no room at all** — and the builder already knew
+the answer to that one: the lock penning the guild in comes off.
+
+**Three hundred levels, zero keys too close, zero compromises.** It costs about
+one lock every three levels. That's the price of your rule, not a bug.
+`─────────────────────────────────────────────────`
+
+---
+
+**Fridge: 30 gold stars, 12 apples.** 🌟 Three new stars — the families, the
+gemstones, and the window abstraction. Thirty!
+
+---
+
+**One question, and it's about what you just unlocked.**
+
+The figure knows which slot your mouse is on. The pack knows which square. So
+**dragging a piece from the pack onto a slot** is now mostly built — the hard
+half is done.
+
+Right now the hero dresses themselves when you press E, and that's the *only*
+way gear goes on.
+
+**Should you be able to overrule them?** Drag a piece onto a slot yourself, and
+they wear it even though their sliders say they'd rather not?
 
 --------------------------------------------------------------------------------

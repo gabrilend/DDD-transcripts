@@ -45,3 +45,4 @@ date	sticker	patch	reason
 2026-09-15	gold-star	0.0-before-the-first-demo	the gemstone says what the jewellery is FOR, not how good it is -- which answers a better question than the one that was asked, and gives jewellery a shape of its own
 2026-09-15	gold-star	0.0-before-the-first-demo	one window abstraction for all of them, so the frame is not written out again every time. It had already been duplicated twice and had already drifted
 2026-09-15	apple	0.0-before-the-first-demo	keys must not sit beside the door they open, with the distance named: at least two rooms between
+2026-09-15	gold-star	0.0-before-the-first-demo	who may dress whom: a hero equips only automatically, the leader only by hand. The leader is the player and a hero is not, so there is nobody inside the leader to decide and somebody inside a hero
