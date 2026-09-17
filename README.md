@@ -68,7 +68,10 @@ Wait — blue.
 
 No, no, it is actually black.
 
-Gosh. I like all of those colours.
+Wait, wait. I think my favourite is black! No, it is actually red.
+
+Okay. If I had to put them in order it is **black, then red, then blue.**
+Specifically that order. Any other order looks weird.
 
 ## Stickers
 
