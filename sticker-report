@@ -89,9 +89,17 @@ awk -F'\t' -v patch="${PATCH}" '
         if (total == 0) { return }
         printf "The mix, all time: gold stars %.0f%%, apples %.0f%%, frowny faces %.0f%%, worms %.0f%%.\n", \
             100 * gold / total, 100 * apples / total, 100 * frowny / total, 100 * worms / total
+        # Two complaints, loudest first, and only ever one of them. Gold stars
+        # outnumbering apples is the fridge that prompted all this. One sticker
+        # in three being gold is the tighter line, the one that bites long
+        # before the ratio inverts, and it lives here rather than in prose so
+        # it is a thing that runs rather than a thing that goes stale.
         if (gold > apples) {
             printf "Gold stars outnumber apples. A gold star that common is an apple in a\n"
             printf "better costume; see the stickers section of the guidance file.\n"
+        } else if (gold * 3 > total) {
+            printf "More than one sticker in three is a gold star. The bar has slipped:\n"
+            printf "a gold star is for work that changed what could be done next.\n"
         }
         if (frowny + worms == 0) {
             printf "Nothing bad has ever gone on this fridge, which is a sign of flinching\n"

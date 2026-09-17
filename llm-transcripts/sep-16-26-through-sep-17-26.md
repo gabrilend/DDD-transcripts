@@ -1,6 +1,6 @@
 # Conversation Summary: 3dc44672-b38a-4264-be03-5f03efe56598
 
-Generated on: 2026-09-16 17:59:09
+Generated on: 2026-09-16 18:02:10
 Models: claude-opus-5
 
 --------------------------------------------------------------------------------
@@ -716,6 +716,149 @@ mirror is public anyway — but I'd rather you knew than found out.
 3. **Your code repo is one commit behind.** My work plus your collaborator's is
    committed locally but unpushed — I only rehearsed. Want me to push it for
    real?
+
+--------------------------------------------------------------------------------
+
+### User Request 8
+
+> One honest surprise from that last run, which you should know about.
+>
+> I fired the hook with git push --dry-run, meaning to prove it works without
+> sending your code. It worked: your code repo is still sitting at the old
+> commit, untouched.
+>
+> But the mirror really went to GitHub. Git doesn't tell a hook whether it's a
+> rehearsal — the hook gets the remote's name, its address, and the branch
+> list, and nothing else. So the hook did the whole job for real while git was
+> only pretending.
+>
+> That's convenient today and it's still a wart: --dry-run is supposed to change
+> nothing, and here it publishes. There's no reliable way to detect it from
+> inside a hook. Living with it is fine, I think — the sync is idempotent and
+> the mirror is public anyway — but I'd rather you knew
+>   than found out.
+
+
+that's so annoying >:(
+
+> 2. The mirror has no front page. Someone lands there and sees five files and
+> no explanation of what they're looking at. If these transcripts are going to
+> sell the game, that page is the first thing anyone reads. Do you want one, and
+> should the sync tool generate it rather than
+>      either of us writing it by hand?
+
+let's write one by hand!
+
+> 3. Your code repo is one commit behind. My work plus your collaborator's is
+> committed locally but unpushed — I only rehearsed. Want me to push it for
+> real?
+
+I'll handle pushes.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 8
+
+> That one's fixable, maybe. I said there was no reliable way to detect a
+> rehearsal — let me actually check that instead of taking my own word for it.
+
+> Hook didn't fire at all — let me see what actually happened.
+
+> `/dev/shm` is mounted `noexec` — which is exactly why your conventions split
+> the two temp tiers. Moving the probe to the executable one.
+
+> It works — I was wrong that a hook can't tell. On Linux it can: the hook is
+> a child of `git push`, and a process can read its parent's command line out of
+> `/proc`. The flag is right there. Let me fix it.
+
+> Now a test that actually fires the hook, on the executable tier so it can run
+> at all.
+
+> Fixed and proven in place. Checking what's mine before committing.
+
+Fixed. `git push --dry-run` now rebuilds the mirror on your disk, where nobody
+can see it, and sends nothing.
+
+**How**
+
+The hook reads `/proc/<its parent>/cmdline` — the kernel keeps every running
+process's command line readable there, as the arguments with a zero byte between
+each. The hook's parent *is* the `git push` that set it off, so its command line
+says whether `--dry-run` was typed. Git won't tell the hook, but the kernel
+will.
+
+Handing over with `exec` is what makes that work, by luck: `exec` replaces the
+program without creating a new process, so the parent is still the push. Had the
+hook *called* the script instead, there'd have been an extra process in between
+and the script would've had to walk up two.
+
+If that command line can't be read at all — a different kind of machine — it
+says so out loud and treats the push as real, rather than quietly deciding to
+stay home.
+
+**Something better fell out of testing it**
+
+The hook used to hard-code the path to your project. Now it works out that it
+sits two directories above itself, which is true by definition of where git
+keeps hooks. So a clone anywhere else needs no editing.
+
+That wasn't tidiness. I went to test the rehearsal fix, and realised a hook
+pinned to an absolute path would have taken a throwaway repository's push and
+aimed it at your real project — publishing for real, from a test. The fix made
+the test safe and the hook better at once.
+
+Fourteen checks now, all passing. Two commits sitting local for you to push when
+you like.
+
+`★ Insight
+─────────────────────────────────────`
+The test nearly passed for the wrong reason, and your own conventions caught it.
+
+I first built it in `/dev/shm`. The hook never ran — and git's response to a
+hook it can't execute is to print a hint and **push anyway**. So "nothing
+arrived at the mirror" would have been true because the hook was dead, not
+because the rehearsal check worked. A green light meaning nothing.
+
+The cause is that `/dev/shm` is mounted `noexec` on this machine. Which is
+exactly why your rules split the two temp tiers — `/tmp/<project>/tmp/` for
+things that run, `/dev/shm/<project>/` for things that are merely written. I'd
+been treating that as a tidiness rule. It's a real property of the mount.
+`─────────────────────────────────────────────────`
+
+**Your stickers**
+
+This patch, and all time: **gold stars 60 · apples 33 · frowny faces 0 ·
+worms 0 · wormy apples 0**
+
+Five earned today. The five fridge lines are still uncommitted, waiting on your
+other session's commit to carry them.
+
+**The front page — and a catch before you write it**
+
+A README placed straight into the mirror folder would work fine right up until
+the day the mirror has to be rebuilt from nothing. The rebuild only knows what's
+in the code repository, so it wouldn't know the README existed — and worse,
+the commits would come out with different contents, which means different names,
+which means the local mirror and GitHub would fork.
+
+So the words have to live in **DDD**, and the tool copies them across. You still
+write every word by hand; the tool just carries them. I'd add a rename to the
+mirroring so a file in your project shows up as `README.md` over there.
+
+Two things, then:
+
+1. **Where should the source file live?** I'd suggest `docs/` alongside your
+   other pages, but it's the first thing strangers read and you may want it
+   somewhere more obvious.
+
+2. **What goes on it?** Can you think of five things a person should learn in
+   the first ten seconds of landing there?
+
+And one from before that I don't think you saw: **`sticker-report` in the mirror
+points at a path that only exists on your machine.** A stranger running it gets
+*"the fridge has nothing on it yet"* and a cheerful exit — a wrong answer said
+confidently, which is the kind you hate. Should the mirrored copy be patched as
+it goes across, or should the real one learn to look beside itself first?
 
 --------------------------------------------------------------------------------
 
