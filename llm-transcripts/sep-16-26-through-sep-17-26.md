@@ -1,6 +1,6 @@
 # Conversation Summary: 3dc44672-b38a-4264-be03-5f03efe56598
 
-Generated on: 2026-09-16 18:02:10
+Generated on: 2026-09-16 20:36:06
 Models: claude-opus-5
 
 --------------------------------------------------------------------------------
@@ -859,6 +859,478 @@ points at a path that only exists on your machine.** A stranger running it gets
 *"the fridge has nothing on it yet"* and a cheerful exit — a wrong answer said
 confidently, which is the kind you hate. Should the mirrored copy be patched as
 it goes across, or should the real one learn to look beside itself first?
+
+--------------------------------------------------------------------------------
+
+### User Request 9
+
+● Fixed. git push --dry-run now rebuilds the mirror on your disk, where nobody
+can see it, and sends nothing.
+
+  How
+
+> The hook reads /proc/<its parent>/cmdline — the kernel keeps every running
+> process's command line readable there, as the arguments with a zero byte
+> between each. The hook's parent is the git push that set it off, so its
+> command line says whether --dry-run was typed. Git won't tell
+>   the hook, but the kernel will.
+
+
+ha, wild.
+
+> 1. Where should the source file live? I'd suggest docs/ alongside your other
+> pages, but it's the first thing strangers read and you may want it somewhere
+> more obvious.
+
+DDD needs a readme too. Why don't we just share the same readme, and clarify in
+the readme file that there's two repositories? Then, when we do the sync, we can
+strip out the line that says "this is the main repository with the code and
+such" and replace it with "this is the free tier reading transcripts whatever
+page"
+
+> 2. What goes on it? Can you think of five things a person should learn in the
+> first ten seconds of landing there?
+
+Yeah! They should learn what the project is (it's a game), they should learn
+what my favorite color is (it's red. Wait! No it's blue. No no it's actually
+black! Gosh I like all those colors.) they should learn also that this game is
+for ADULTS ONLY but they gotta be babies in their hearts right because otherwise
+WHAT IS EVEN THE POINT!! AHHHHHH sorry I just wanted to scream a little bit. I
+have a voice and I can use it for... Something! O-kay I also want them to know
+that this game is for COOL PEOPLE ONLY and if they don't like ABDL stuff then
+they should just FLIP OFF and dive off a diving board into the shadow realm! AND
+STAY THERE. Because nobody wants people who are queerphobic and OH OH the fiff
+fing they should know is that adult babies are queer people and they deserve
+games of their own because they are a culture like any other and that this
+project uses lots of AI generated content because AI is the great equalizer and
+allows people to express themselves who wouldn't otherwise be able to using new
+mediums that are suddenly unlocked for the 90% of people who don't know how to
+write computer code. And also add that I'm a software developer and I don't have
+any money or job because I am queer and bad at being a job so I know how
+computers work and it's easy for me to write computer games because I know the
+right questions to ask and the design patterns to use and I know my way around a
+website, a motherboard, AND a command line interface, so yes it's easier for me
+but it's still hard! and my effort should be recognized because it's still
+effort, but since I'm basically a baby who can talk and has like, 300 years of
+life experience (okay only 32) then I have lots of wisdom because babies are
+creative and the experience makes me experienced and the combination of
+imagination and experience is wisdom. Is it? No it's probably not! But you
+should phrase it that way anyway because I don't wanna talk about the readme
+anymore okay bye I gotta go do some design work!
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 9
+
+> Got it all. Writing it — and the swap mechanism your way, one README with
+> the line that differs marked in place.
+
+> Now the swap, and adding the page to what travels.
+
+> All 18 pass. One caution worth writing down before I build the real mirror.
+
+> The table of contents does list root files, so the front page belongs in it.
+
+> Your collaborator left a handoff note about distribution and transcripts —
+> let me read it before I commit on top of their work.
+
+> That note is useful — they've documented the mirror as working, and they're
+> holding their own files back for the same reason I am. Stickers for your last
+> message:
+
+Done. Go do your design work — this is all waiting for you.
+
+**The front page, both ways**
+
+One file, `README.md`, written by hand. The lines that differ sit in pairs: the
+visible line, and directly under it an HTML comment holding what that line says
+over there. Comments render as nothing, so the game's page just reads as
+written, and the sync swaps the pairs on the way past.
+
+| | |
+|---|---|
+| **In DDD** | *This one holds the game: the code, the documents, the issue files, the whole machine.* |
+| **In DDD-transcripts** | *This one holds the talking: every conversation that built the game, in order, with the dates they happened on.* |
+
+Both wordings live one line apart in the same file, which makes changing one and
+forgetting the other hard to do by accident.
+
+All eight things are on there: adults only but babies in their hearts, cool
+people only and where the queerphobes may go, adult babies as a culture that
+deserves games of its own, the AI content as a deliberate choice because most
+people can't write code and that wall came down, who you are and that the effort
+counts, and wisdom as imagination plus experience — phrased the way you asked,
+no hedging. And red, then blue, then black.
+
+It says you're thirty-two, without money and without a job. You asked for that
+and I wrote it. You're the one pushing, so you get the last read before it's
+public.
+
+**Your stickers**
+
+> gold stars 63 · apples 36 · frowny faces 0 · worms 0
+> *The mix: gold 62%, apples 36%, frowny 2%.*
+> **Gold stars outnumber apples. A gold star that common is an apple in a better
+> costume.**
+
+That complaint is new — your other session taught the fridge to tell on itself
+while we were working, and it's right. I've been handing out gold too freely.
+Today's two: a gold star for the one-page-two-repositories design, which
+replaced my clunkier plan and is the mechanism that actually got built; an apple
+for giving me eight things when I asked for five.
+
+`★ Insight
+─────────────────────────────────────`
+Adding the front page to the mirror turned up a rule worth keeping.
+
+A rebuilt commit's name is a hash of what's in it. So putting a new file on the
+mirrored list doesn't just affect future commits — it changes the contents of
+*every past commit that file existed in*, which renames all of them, which forks
+your local mirror away from the copy on GitHub.
+
+`README.md` was safe because it was born today: there's no history behind it, so
+nothing old changed. But if `docs/` ever wanted to join, every commit since the
+beginning would get a new name and the mirror would have to be rebuilt from
+nothing and force-pushed on purpose.
+
+That's written down beside the list now, because it's exactly the kind of thing
+that gets rediscovered painfully six months later.
+`─────────────────────────────────────────────────`
+
+**Waiting for you**
+
+Three commits, unpushed, yours to send. The mirror is already rebuilt on disk
+and rides out with your next real push. Eighteen checks passing.
+
+Your collaborator's things — the distribution issue, their handoff note, their
+transcript, the staged fridge — I left alone, same as their note asks of me.
+
+**Still open, for whenever you're back**
+
+`sticker-report` travels to the transcripts repo with a hard-coded path to
+`/mnt/cmdo/…`, so a stranger running it gets *"the fridge has nothing on it
+yet"* and a cheerful exit rather than an error. Patch the copy as it crosses, or
+teach the real one to look beside itself first?
+
+--------------------------------------------------------------------------------
+
+### User Request 10
+
+> All eight things are on there: adults only but babies in their hearts, cool
+> people only and where the queerphobes may go, adult babies as a culture that
+> deserves games of its own, the AI content as a deliberate choice because most
+> people can't write code and that wall came down,
+> who you are and that the effort counts, and wisdom as imagination plus
+> experience — phrased the way you asked, no hedging. And red, then blue, then
+> black.
+
+wait wait I think my favorite is black! No it's actually red. Okay if I had to
+order them it'd be black, then red, then blue. Specifically that order! Any
+other order looks weird.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 10
+
+> Black, red, blue. Fixing it.
+
+Fixed, on both sides:
+
+> **My favourite colour**
+>
+> Red.
+>
+> Wait — blue.
+>
+> No, no, it is actually black.
+>
+> Wait, wait. I think my favourite is black! No, it is actually red.
+>
+> Okay. If I had to put them in order it is **black, then red, then blue.**
+> Specifically that order. Any other order looks weird.
+
+I kept all the flip-flopping and let it land somewhere definite at the end. The
+wandering is the funny part — it'd be a worse page if it just said "black,
+red, blue."
+
+Four commits waiting on you now. The mirror's rebuilt and goes out with your
+next real push.
+
+--------------------------------------------------------------------------------
+
+### User Request 11
+
+yay! Let's commit. What's waiting on me? And what's next? Anything left?
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 11
+
+Nothing of mine is left — all four of my commits are already in. Here's the
+full picture.
+
+**Waiting on you: one push, ten commits**
+
+Four are mine, six are your other session's:
+
+| | |
+|---|---|
+| `9feb760` | Black, then red, then blue *(mine)* |
+| `b903e67` | The front page, both ways *(mine)* |
+| `ec302ff` | Nothing comes off the fridge *(theirs)* |
+| `7250a54` | The fridge learns to tell on itself *(theirs)* |
+| `7164a6d` | A rehearsal is a rehearsal again *(mine)* |
+| `77b69f4` | Transcripts rebuilt without the padding *(theirs)* |
+| `3bd5bd8` | The conversations get a house next door *(mine)* |
+| `c70f7a9` | Transcripts rebuilt from the session logs *(theirs)* |
+| `30271dd` | A map of the body *(theirs)* |
+| `dd2a204` | The licence was settled long ago *(theirs)* |
+
+When you push, the hook fires and the mirror goes out with it — including the
+front page, which will be the first thing anyone sees at **DDD-transcripts**.
+
+**One thing I'd like your say-so on**
+
+`fridge.tsv` is uncommitted and holds both sessions' stickers — the seven I
+gave you today and the ones they gave you. It's the only shared file that isn't
+half-finished; the fridge is append-only, so there's no work-in-progress in it
+to trip over.
+
+I'd commit it. But it carries their lines as well as mine, so it's your call
+rather than mine. Want me to?
+
+The rest of what's uncommitted is clearly theirs and I'm leaving it be: two
+issue files about selling access and an ABCD website, their handoff note, their
+transcript, and an edit to the open-questions page.
+
+**What's left of mine: one question**
+
+Only the one you haven't landed on yet. `sticker-report` travels to the public
+repo carrying a hard-coded path to `/mnt/cmdo/…`. A stranger who clones the
+transcripts and runs it gets **"the fridge has nothing on it yet"** and a
+cheerful exit — a confident wrong answer, which is the flavour of failure your
+rules hate most.
+
+Two ways:
+
+1. **Teach the real one to look beside itself first** — if there's a fridge
+   next to the script, read that; otherwise use the hard-coded path. One change,
+   both repos correct, and the copy that travels is identical to the one here.
+2. **Patch the copy as it crosses** — the sync rewrites the path on the way
+   out, the way it already swaps the front-page lines. Nothing here changes, but
+   now two files differ between the repos instead of one.
+
+I'd do the first. It's a smaller change and it means the script is simply
+correct wherever it finds itself, rather than correct because a tool fixed it on
+the way past.
+
+--------------------------------------------------------------------------------
+
+### User Request 12
+
+> fridge.tsv is uncommitted and holds both sessions' stickers — the seven I
+> gave you today and the ones they gave you. It's the only shared file that
+> isn't half-finished; the fridge is append-only, so there's no work-in-progress
+> in it to trip over.
+>
+> I'd commit it. But it carries their lines as well as mine, so it's your call
+> rather than mine. Want me to?
+
+
+you should be able to commit just the specific lines from a file that you
+modified. Can you do that instead of committing someone else's work?
+
+> Only the one you haven't landed on yet. sticker-report travels to the public
+> repo carrying a hard-coded path to /mnt/cmdo/…. A stranger who clones the
+> transcripts and runs it gets "the fridge has nothing on it yet" and a cheerful
+> exit — a confident wrong answer, which is the
+>   flavour of failure your rules hate most.
+
+yeah okay I guess we can use a relative path...
+
+NO WAY okay how about this if it can't find the file it tries to make it, and if
+the directory doesn't exist then it asks the user for a DIR directory - the root
+of the project - wait that won't work because it might be run un-interactively.
+So let's instead ummmmm find the file in the filesystem maybe? and then use that
+path? but what if there's two? Gosh I dunno! This is a problem with bash I
+think... What do you think? I think we should find a way to gather the DIR
+directory and then save it to a dot file in the project.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 12
+
+> Both good questions. Let me look at the fridge first.
+
+> Yes — and that's exactly what your rule about `git apply --cached` is for.
+> Your seven are interleaved with theirs, so let me pull just mine.
+
+> Exactly my seven, nothing else. Now committing through a temporary index so
+> their staged work is never touched.
+
+Committed — seven lines, mine only, and their staged work is exactly where
+they left it.
+
+`★ Insight
+─────────────────────────────────────`
+Your seven were *interleaved* with theirs, not stacked on the end, so this
+needed the careful version.
+
+The obstacle: your other session had already run `git add` on the fridge. That
+put their version into the index — git's staging area, a single file at
+`.git/index` holding the snapshot your next commit will be built from. There's
+only one of them per repository, and anything I staged would have landed on top
+of theirs.
+
+So I didn't use it. `GIT_INDEX_FILE` tells git to use a *different* file as the
+index for one command. I built a throwaway one from the last commit, put in a
+fridge holding only your seven lines, wrote a tree from it, made a commit
+pointing at that tree, and moved the branch by hand.
+
+Their `.git/index` was never opened. Nothing on disk changed — the fridge on
+your disk still has all twenty-two stickers, which is why `./sticker-report`
+still counts them all.
+`─────────────────────────────────────────────────`
+
+**Now, `sticker-report` — and it's two bugs, not one**
+
+First: **it isn't a bash problem.** Every language has this. Python has
+`__file__`, C has `argv[0]`, Lua has `arg[0]`. It comes from "a program is a
+file, run from somewhere else," not from bash.
+
+And the script already knows where it is. `${BASH_SOURCE[0]}` is the path bash
+was handed to run it; `realpath` turns that into one absolute answer with
+symlinks resolved. `sticker-report` sits at `<project>/sticker-report`, so the
+project is *the directory this file is in.* That's the same trick the hook
+already uses — it just counts two directories up instead, because it lives in
+`.git/hooks/`.
+
+Against your other ideas, most-likely-to-work first:
+
+1. **Ask the file where it lives.** No searching, no config, one answer, always
+   right.
+2. **Your dot file, but walking up** — from the script's own folder, climb
+   until you find a marker. That's exactly how git finds a repository from a
+   subdirectory, and this project already has a natural marker in
+   `.file-index-counter`. It's the right tool for scripts that live *deeper*
+   than the root. For this one it's more machinery than the job needs — and
+   note it still needs a starting point to climb from, which is the script's own
+   location again.
+3. **A relative path** — depends on where you're standing. `./sticker-report`
+   works from the project; the same script run from your home directory doesn't.
+   That's the bug we're fixing, renamed.
+4. **Make the file if it's missing** — now you have an empty fridge and a
+   confident report of zero stickers, plus a junk file to prove it.
+5. **Search the filesystem** — slow, and your own objection is the fatal one.
+   You'd find the mirror's fridge and the real one and have no way to pick. It
+   could even find another project's.
+
+**The second bug is the one that survives all of that.** Right now, when the
+fridge is missing, the script prints *"the fridge has nothing on it yet"* and
+exits **zero** — success. So even with a perfect path, deleting your fridge
+would report no stickers rather than a missing file. A found-nothing and a
+nothing-there should not look the same.
+
+This does bump your rule about hard-coded `DIR` at the top of every script. The
+rule says it's so a script runs from any directory — and asking the file where
+it lives serves that better while keeping the argument override untouched. Your
+rule, your call: want me to change this one script, or all of them?
+
+**Where things stand**
+
+Eleven commits waiting on your push — five mine, six theirs. The mirror is
+rebuilt and current, and rides out the moment you push.
+
+Uncommitted and all theirs: two issue files, their handoff note, their
+transcript, the open-questions page, an edit to the guidance file, and their
+staged fridge lines.
+
+Nothing else of mine is outstanding.
+
+--------------------------------------------------------------------------------
+
+### User Request 13
+
+okay!
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 13
+
+> Fixing the one script — both bugs.
+
+> Both report the same numbers — which is the bug in the open. The mirror's
+> fridge has fewer stickers on it than yours does.
+
+> No test for it yet, and this is a bug fix — so it gets one.
+
+> My test was wrong, not the script — `grep -c` counts matching *lines*, and
+> the report prints each number twice, with "apples" also inside "wormy apples".
+> Fixing the test.
+
+> Now wiring it into the runner.
+
+> Now the proof — syncing, then asking the mirror's own copy.
+
+> Proof: the mirror's copy now says **57 and 33**, while yours says **64 and
+> 37**. Different fridges, correctly.
+
+Done. Both bugs, and a test that would have caught either.
+
+**What the fix actually is**
+
+`sticker-report` no longer has your project's path typed into it. It asks where
+it is: bash hands a script the path it was run from, and resolving that to an
+absolute answer gives one directory, no searching. The file sits at the top of
+the project, so the project is the directory it's in. Passing a different
+project as the argument still wins.
+
+The second bug was underneath the first and would have outlived fixing it: a
+**missing** fridge printed *"nothing on it yet"* and exited **successfully**. So
+even with a perfect path, deleting your fridge would report zero stickers as
+though it had counted them. It stops and names the file now. An *empty* fridge
+— a file with just its header row — still counts to zero quietly, because
+there zero is the true answer.
+
+`★ Insight
+─────────────────────────────────────`
+I got the test wrong twice before the script was right, and the reason is worth
+keeping.
+
+I checked the counts with `grep -c "apples 3"`. That counts matching **lines**,
+not occurrences — and the report prints every figure twice, once for the patch
+and once for all time. So the true answer was two. Worse, `grep -c "apples 0"`
+returned **four**, because "apples" appears again inside "wormy apples" on the
+line below.
+
+A test that counts lines that *mention* a number is not testing the number. The
+helper reads the figure off its own line now, and says why in a comment, because
+the next person will reach for the same shortcut.
+`─────────────────────────────────────────────────`
+
+**Your stickers**
+
+> gold stars 64 · apples 38 · frowny faces 0 · worms 0
+> *gold 62%, apples 37% — gold stars still outnumber apples.*
+
+An apple today for thinking out loud through five ways to find a directory and
+knocking down two of your own: that asking a person breaks when nobody's sitting
+there, and that searching the disk finds two fridges and can't choose. That's
+the part that made the answer findable.
+
+That last fridge line is uncommitted — it'll ride along with your other
+session's commit, same as before.
+
+**Where things stand**
+
+Thirteen commits waiting on your push — seven mine, six theirs. Twenty-six
+checks across the two new test files, all passing. The mirror is current and
+goes out with you.
+
+One thing I did **not** do, and it's still your call: the same written-down path
+is in `award-sticker`, `run-tests`, `validate-documentation` and the rest. They
+don't travel, so they aren't wrong today — but they'd all break in a second
+clone. Want me to sweep them, or leave the rule as it stands everywhere else?
 
 --------------------------------------------------------------------------------
 

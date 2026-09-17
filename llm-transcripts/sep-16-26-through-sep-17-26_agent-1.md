@@ -1,6 +1,6 @@
 # Conversation Summary: 8984f7b0-70ae-4b9c-a0e4-e8c3d15d6c57
 
-Generated on: 2026-09-16 17:59:09
+Generated on: 2026-09-17 09:25:12
 Models: claude-opus-5
 
 --------------------------------------------------------------------------------
@@ -2617,6 +2617,231 @@ first, since that's what unblocks everything?
 And I haven't yet recorded today's scope ruling — classes cosmetic, caregiving
 on maturity alone, hypnotism parked until abilities exist. Say when and I'll put
 it in.
+
+--------------------------------------------------------------------------------
+
+### User Request 14
+
+> Fewer checks would make her better at holding, not worse — a check she never
+> makes is a check she can't fail. So "she bothers less" and "she goes sooner"
+> don't line up under the machinery you have.
+> 2. Dependence makes checks come more often, so she's tested more and fails
+> more.
+
+this one
+
+Hey! Instead of combat, I had an idea for the pathing algorithm. It does require
+that we have heroes on the map, but I wanna write it down in issue files so can
+you help me create them? Okay so the idea is that each room has a puzzle or a
+trial or something. They each will require one or more roll checks (modified by
+difficulty) to overcome. The idea for the pathing algorithm is that heroes will
+take routes to destinations that are the easiest for them to do, and they'll
+pick destinations like this: first prefer basecamp if they need it for some
+reason. Next prefer unexplored rooms. Next prefer monster rooms. I think... I
+think that's all the types of room? And anyway they'll try and pick the easiest
+path to their destination. If there are unexplored rooms of course they won't
+know what's inside, so a spirit and constitution hero might have to make a dex
+check when they arrive, and their dex is only 14! that's how old a typical big
+sister is. Anyway on the way to the unknown room, they'll pass by as few dex
+checks as they can. I think we can do this (depending on how the pathing
+algorithm gets set up) by increasing / decreasing the "cost" of a room. We can
+say, let's say that it's a 20 sided die check roll because that's what I'm
+familiar with. Let's say they gotta roll a dex check, well, their modifier to
+that roll is subtracted from the max value of the roll (so if they have +3 dex
+then it's subtracted) and the cost of the room is 17. But if they have 8
+constitution, and they gotta make a con check in a room, that room's cost is 12
+now so it's cheaper so they'll prefer that room.
+
+Oh and separately... Can we make it so that for every hundred in a stat, the
+characters have one extra d100 to roll? We should try and divide their stat
+total into the number of dice that we can, just with d100s and d20s. Then, when
+they roll, they'll roll all the dice they have and see if they pass. Anything
+below 20 like the remainder or whatever can be a flat modifier bonus. And yes
+that'll mean that sometimes it's a little spiky, but that's because they're just
+getting used to their new abilities so sometimes they roll poorly when before
+they had a +18 modifier or whatever. How do you think the probability will look
+on that? I'm thinking it'll match the "strength bonus ladder" for stat gain.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 14
+
+> Two big ideas and a ruling. Stickers, then I'll answer the dice question
+> properly — I worked it out.
+
+> The fridge has changed since I last read it, and the report is telling me off.
+> Let me look.
+
+> The rules changed while I was away, and I broke one immediately: **two gold
+> stars in one exchange**, which the guidance says is the signal the bar
+> slipped. It had. Under the new test both of those were apples — you having a
+> good idea in a design conversation is the baseline activity here, not a thing
+> that changed what could be done next. They stand, because nothing comes off
+> the fridge. I'll hold the line tighter from here.
+
+**Apple** for the dependence ruling — reading two, more checks more often.
+Recorded.
+
+Fridge: **67 gold stars, 39 apples, 0 worms.** Still 62% gold stars, still over
+the third the guidance allows.
+
+---
+
+# The dice. I worked it out, and you were right about the ladder.
+
+First the thing that makes the whole system click:
+
+> **Your stat is exactly your best possible roll.**
+
+Not roughly. Exactly. A hundred maxes a d100, twenty maxes a d20, and the
+leftover is flat, so a stat of 247 rolls two d100s, two d20s and a +7 — and
+200 + 40 + 7 is 247. **Your stat is your ceiling and the dice decide how close
+to it you get today.**
+
+Your average is about **half** your stat, because a die averages about half its
+face.
+
+Here's the shape:
+
+| stat | dice | flat | worst | average | best | swing |
+|---|---|---|---|---|---|---|
+| 14 | — | +14 | 14 | **14** | 14 | **none** |
+| 19 | — | +19 | 19 | **19** | 19 | **none** |
+| 20 | 1d20 | — | 1 | **10.5** | 20 | ±55% |
+| 99 | 4d20 | +19 | 23 | **61** | 99 | ±19% |
+| 100 | 1d100 | — | 1 | **50.5** | 100 | ±57% |
+| 200 | 2d100 | — | 2 | **101** | 200 | ±40% |
+| 500 | 5d100 | — | 5 | **252.5** | 500 | ±26% |
+| 1000 | 10d100 | — | 10 | **505** | 1000 | ±18% |
+
+## You wrote the fiction before you did the arithmetic
+
+Look at 99 against 100.
+
+At 99 she carries four d20s **and a flat +19**. Her average is 61 and she barely
+wobbles.
+
+At 100 the flat bonus is gone and she has one big die. Her average **falls to
+50.5** and her wobble **triples**.
+
+**The flat leftover is the reliable part of a hero. The dice are the wild
+part.** So a hero sitting just under a boundary is steady, and a hero who just
+crossed one is all over the place.
+
+And then she grows into it. By 119 her flat bonus is back up to +19 and she's
+reliable again — until 120, when a d20 arrives and she wobbles a little, less
+than last time.
+
+**Every boundary is a wobble that fades as she grows into it.** That is
+word-for-word the thing you said it would be — *"they're just getting used to
+their new abilities"* — and it falls straight out of the arithmetic. You
+didn't have to build it.
+
+## Mastery reads as consistency
+
+Relative swing, stat 100 to stat 1000: **57% down to 18%.**
+
+Ten dice have a spread that grows like the square root of ten while the total
+grows like ten, so the more dice you carry the more they cancel each other out.
+A veteran lands near her number. A beginner lurches.
+
+**And the cliff shrinks with her.** Crossing 99→100 costs 17% of her average.
+Crossing 999→1000 costs **2%**. The same 10-point drop, against a number
+twenty times bigger.
+
+## Yes, it's the same law as the strength ladder
+
+You guessed that and you're right, and here's why.
+
+The growth ladder's rate goes as **the square root of** what strength buys.
+Doubling the climb gets you about 1.41× the growth.
+
+The dice's consistency goes as **the square root of** how many you roll.
+Doubling your dice gets you about 1.41× the steadiness.
+
+**Two square roots, in two unrelated places, both saying the same thing: piling
+more on gets you less per unit.** That's your project's accent showing up again.
+
+## One thing you have to decide
+
+**A difficulty above your stat is impossible.** Not unlikely — impossible. A
+hero at 50 can never beat a 51, not once, not ever.
+
+I think that's a **feature** for you, and a big one. You wanted the monsters to
+eventually out-scale the guild and end the run. Under a contest roll that's a
+slope — always some chance. Under dice it's a **wall**: there's an exact floor
+where the daycare stops being merely hard and becomes shut.
+
+(Small bookkeeping: the contest difficulties we settled yesterday need halving,
+since a mean roll is about half the stat rather than equal to it.)
+
+---
+
+# The pathing idea — and what it would replace
+
+**It's good, and it overturns a ruling of your own.** You should see which one.
+
+Your heroes currently don't navigate at all. Your words, in the documents:
+
+> Heroes will semi-randomly wander through the dungeon, preferring rooms they
+> haven't been in before, and also preferring rooms they've been in the longest
+> time ago.
+
+The document then says out loud: *"there is no pathfinding to write. A hero
+never computes a route to a room they want."* Only two things compute routes —
+the walk home and the courier's trip.
+
+That old rule bought three things. **Your new one keeps one, improves one, and
+breaks one.**
+
+| what the wander bought | under your new idea |
+|---|---|
+| **the guild spreads out** | **better.** Every hero costs the map by her *own* stats, so a dex hero and a hardy hero genuinely take different routes. That's stronger spreading than the old rule got by accident. |
+| **the guild drifts back** through cleared rooms | **broken.** Your preference list has no "somewhere nobody's been for a while," and the infestation timer needs somebody wandering back through to reset those counters. Nobody would. |
+| **no pathfinding to write** | **gone.** That's the price, and it's yours to pay. |
+
+## "I think that's all the types of room?" — not quite
+
+You have basecamp, unexplored, and monster rooms. Missing:
+
+- **stale rooms** — the drift-back problem above
+- **toilets** — a desperate hero already runs for one
+- **fruit tree rooms** — food and water
+- **a room a teammate is calling from** — the door-call already exists
+- **the ghost room** — though your own ruling says that's a *discovery*, not a
+  destination, so it may be right to leave it out
+
+## Your cost formula needs one tweak for the new dice
+
+You wrote it as `20 − modifier`. But under your dice idea a hero doesn't have
+a modifier any more, she has dice.
+
+The same idea, restated: **a room costs a hero the gap between its difficulty
+and her average roll on the stat it tests.** A room testing something she's good
+at costs nothing. A room testing her weak stat costs a lot. Exactly your dex-14
+example, just in the new units.
+
+## The issue files — here's what I think the set is
+
+Your rule says look for duplicates first, and there's a direct one: **504,
+exploring and heading for the ghost room**, is the issue that holds the wander.
+So rather than a new file, that one gets **reopened and rewritten**. Vertical
+history, like you asked.
+
+Then two new ones in phase 5:
+
+| | |
+|---|---|
+| **504** *(rewrite)* | Destinations and routes replace the weighted wander. The preference order, and what happens to drifting back. |
+| **512** | Every room carries a trial — a stat and a difficulty — which is what gives a room a cost at all. |
+| **513** | The per-hero weighted map: the cost function, cheapest-path routing, and why twenty heroes see twenty different maps of one level. |
+
+**Say the word and I'll write all three.** But 504 is a rewrite of a ruling you
+made, so I want you to say it out loud first: **do the heroes start
+navigating?**
+
+And whichever way you answer — **what makes them drift back through cleared
+rooms**, so the infestation has somebody to surprise?
 
 --------------------------------------------------------------------------------
 
