@@ -32,9 +32,18 @@
 #   ./sticker-report
 #   ./sticker-report /path/to/project
 
-DIR="/mnt/cmdo/ritz/games/tq/ai-stuff/double-diaper-dungeon"
+# The project root, worked out rather than written down, because this script
+# travels: a copy of it rides to the transcripts repository, where a path typed
+# in here would name a directory that exists on one machine in the world.
+#
+# It knows where it is. BASH_SOURCE holds the path this file was run from, and
+# realpath turns that into a single absolute answer with any symlinks resolved.
+# This file sits at the top of the project, so the project is the directory it
+# is in. Still overridable as the first argument, for reading a fridge that
+# belongs to some other checkout.
+DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
-if [ -d "$1" ]; then
+if [ -d "${1:-}" ]; then
     DIR="$1"
     shift
 fi
@@ -42,9 +51,15 @@ fi
 FRIDGE="${DIR}/fridge.tsv"
 PATCH_FILE="${DIR}/patch"
 
+# A missing fridge is a broken installation, not an empty one. Saying "nothing
+# on it yet" and succeeding would report zero stickers with every appearance of
+# having counted them, which is a wrong answer delivered confidently -- the
+# worst kind. An empty fridge is a file with only its header row, and that
+# counts to zero on its own, through the same arithmetic as any other count.
 if [ ! -f "${FRIDGE}" ]; then
-    echo "The fridge at ${FRIDGE} has nothing on it yet."
-    exit 0
+    echo "sticker-report: no fridge at ${FRIDGE}." >&2
+    echo "Nothing was counted. This is a missing file rather than an empty fridge." >&2
+    exit 1
 fi
 
 if [ ! -f "${PATCH_FILE}" ]; then
