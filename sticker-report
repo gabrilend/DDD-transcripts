@@ -1,16 +1,32 @@
 #!/usr/bin/env bash
 #
 # sticker-report -- reads the fridge and says how many of each sticker there
-# are, for the patch being made right now and for all time.
+# are, for the patch being made right now and for all time, and whether the
+# mix of them has gone lopsided.
 #
 # Run at every git commit and at the end of every session, because the
 # developer asked to be told both numbers at both moments. The game runs the
 # same arithmetic on the same file to show players.
 #
-# The arithmetic: a worm eats one apple and turns it into a wormy apple, so
-# apples shown = apples given minus worms (never below zero) and wormy apples
-# = the apples the worms got. A retract-frowny line takes back one frowny face.
-# Gold stars are never taken back.
+# THE ARITHMETIC
+#
+# A worm is an opportunity eaten -- a thing taken back, a thing broken, or a
+# request that fell short after trying. It eats a sticker she already has and
+# leaves it on the fridge spoiled rather than gone. A plain worm eats an apple:
+# apples shown are apples given minus worms, floored at zero, and wormy apples
+# are the ones the worms got. A gold-worm does the same to a gold star. A
+# retract-frowny takes back one frowny face. Gold stars were once never taken
+# back; the gold-worm is what changed that, and it is the only thing that can.
+#
+# THE MIX
+#
+# The developer's complaint, in her words, was praise saturation: a fridge of
+# almost nothing but gold stars, which devalues the gold the way an asteroid
+# of it would. So the report also prints each kind as a share of everything
+# awarded, and says so plainly when gold stars have come to outnumber apples,
+# because an apple is supposed to be the ordinary sticker and the gold star
+# the rare one. Retractions are left out of the share, since a retraction is
+# a correction rather than an award.
 #
 # Usage:
 #   ./sticker-report
@@ -45,21 +61,49 @@ awk -F'\t' -v patch="${PATCH}" '
             now[$2] = now[$2] + 1
         }
     }
-    function shown(counts,    gold, apples, frowny, worms, wormy) {
+    # Two lines of counts: the good ones on top, the spoiled ones underneath.
+    function shown(counts,    gold, apples, frowny, worms, goldworms, wormy, wormygold) {
         gold = counts["gold-star"] + 0
         apples = counts["apple"] + 0
         frowny = counts["frowny-face"] - counts["retract-frowny"]
         if (frowny < 0) { frowny = 0 }
         worms = counts["worm"] + 0
+        goldworms = counts["gold-worm"] + 0
         wormy = worms
         if (wormy > apples) { wormy = apples }
         apples = apples - wormy
-        printf "  gold stars %d   apples %d   frowny faces %d   worms %d   wormy apples %d\n", gold, apples, frowny, worms, wormy
+        wormygold = goldworms
+        if (wormygold > gold) { wormygold = gold }
+        gold = gold - wormygold
+        printf "  gold stars %d   apples %d   frowny faces %d\n", gold, apples, frowny
+        printf "  worms %d   wormy apples %d   gold worms %d   wormy gold stars %d\n", worms, wormy, goldworms, wormygold
+    }
+    # The share each kind takes of everything awarded, so a lopsided fridge is
+    # visible at the moment it is reported rather than months later.
+    function mix(counts,    gold, apples, frowny, worms, total) {
+        gold = counts["gold-star"] + 0
+        apples = counts["apple"] + 0
+        frowny = counts["frowny-face"] + 0
+        worms = counts["worm"] + counts["gold-worm"] + 0
+        total = gold + apples + frowny + worms
+        if (total == 0) { return }
+        printf "The mix, all time: gold stars %.0f%%, apples %.0f%%, frowny faces %.0f%%, worms %.0f%%.\n", \
+            100 * gold / total, 100 * apples / total, 100 * frowny / total, 100 * worms / total
+        if (gold > apples) {
+            printf "Gold stars outnumber apples. A gold star that common is an apple in a\n"
+            printf "better costume; see the stickers section of the guidance file.\n"
+        }
+        if (frowny + worms == 0) {
+            printf "Nothing bad has ever gone on this fridge, which is a sign of flinching\n"
+            printf "rather than a sign of a perfect record.\n"
+        }
     }
     END {
         printf "This patch (%s):\n", patch
         shown(now)
         printf "All time:\n"
         shown(all)
+        printf "\n"
+        mix(all)
     }
 ' "${FRIDGE}"
