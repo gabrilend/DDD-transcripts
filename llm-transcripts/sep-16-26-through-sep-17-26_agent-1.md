@@ -1,6 +1,6 @@
 # Conversation Summary: 8984f7b0-70ae-4b9c-a0e4-e8c3d15d6c57
 
-Generated on: 2026-09-17 09:25:12
+Generated on: 2026-09-17 09:47:46
 Models: claude-opus-5
 
 --------------------------------------------------------------------------------
@@ -2842,6 +2842,256 @@ navigating?**
 
 And whichever way you answer — **what makes them drift back through cleared
 rooms**, so the infestation has somebody to surprise?
+
+--------------------------------------------------------------------------------
+
+### User Request 15
+
+Can you make a dice checker application similar to the ones in the scripts
+directory? It should render a graph showing the probability of various dice
+types. We should be able to click buttons along the bottom to set the thresholds
+- so if we want d100s and d20s, then we click those two buttons, and they should
+be shaped like the dice they're supposed to be and should say the number of
+sides on the button. We should also have d12, d10, d8, d6, and d4. It should
+dynamically update the graph on top because we're trying to estimate
+probabilities. I think... I think a... chart that I can't remember the name of
+would work best... It looks like vertical lines and their width corresponds to
+how likely that result is. The Y axis is the value being rolled (which should be
+modifiable as well, we should be able to type Y to insert the max Y value and X
+to insert the max X value) and the X value should be... How likely it is to roll
+there. Will that cover it? I think somethings missing... The modifier bonus
+maybe? Gosh I don't know how to chart this! It's really hard! Can you help?
+
+Oh also for pathfinding they should only seek to explore rooms that are
+bordering a room that is already explored. Same for the monster rooms - only
+prefer a monster room if we know where it is. Make sure this respects walls and
+locked doors - treat a locked door as a wall for the purposes of pathfinding.
+
+toilets and fruit trees should be considered types of "puzzles" because "puzzle"
+really means "room feature"
+
+and yes if they pass by a room that an ally is calling for aid in, then they
+should abandon what they're doing and help. Unless they really gotta go and then
+they'll go finish their business and then come back, so we need a queue of
+destination targets that get sorted according to some priority heuristic that we
+haven't designed yet. For now it's just time, as in, FIFO, but we should
+scaffold for a more complex system because we definitely want to build one
+later. Also heroes don't need to worry about the ghost room - they enter once,
+see that it's the ghost room, and then they mark all of it's entrances as
+"walls" for the purposes of pathfinding. A ghost room could just have a cost of
+ten thousand, that might make it easier.
+
+> The same idea, restated: a room costs a hero the gap between its difficulty
+> and her average roll on the stat it tests. A room testing something she's good
+> at costs nothing. A room testing her weak stat costs a lot. Exactly your
+> dex-14 example, just in the new units.
+
+I think that should work?
+
+> And whichever way you answer — what makes them drift back through cleared
+> rooms, so the infestation has somebody to surprise?
+
+their changing stats, also maybe the rooms shuffle themselves sometimes because
+it's a HAUNTED daycare (we should notify the player whenever that happens tho)
+and heroes won't notice until they enter and are beset by a new, random
+challenge that they didn't expect. For now, let's just make each puzzle just do
+a random ability check or two or zero. Then when we start building room features
+we can build them out more.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 15
+
+> Let me look at what the scripts directory does so the dice app matches the
+> house.
+
+Now the dice checker. Writing it as a LOVE window under `scripts/`, the same
+shape as the other checkers.
+
+--------------------------------------------------------------------------------
+
+### User Request 16
+
+[Image: original 2560x1440, displayed at 2000x1125. Multiply coordinates by 1.28
+to map to original image.]
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 16
+
+> The screenshot grabbed a different workspace. Let me target the window itself.
+
+> It runs and the numbers are right — 1d20 reaching 10 is 55%, which is 11
+> faces out of 20. But I can see three layout bugs and one real drawing bug. Let
+> me fix them.
+
+> Better. Two things left: the bars are thin combs in tall rows, and it opens on
+> a boring pool.
+
+> Now the issue files. Let me read the one that already holds the wander, since
+> it's a rewrite rather than a new file.
+
+> Now the issue files. Rewriting 504 first, since it holds the ruling being
+> overturned.
+
+> The validator caught them — new issues have to be in the roadmap too.
+
+> The launcher promises terminal numbers it can't deliver, and the arithmetic is
+> trapped inside the window. Let me split it the way `check-colours` splits its
+> verdict.
+
+> The other tool ignores the argument entirely. Mine tried to use it and picked
+> up LOVE's own — the project path is the *second* argument under LOVE, not
+> the first.
+
+> Found it — I shadowed the module with a local counter of the same name
+> inside `recount`.
+
+Everything runs and validates. Here's the lot.
+
+---
+
+# The chart you couldn't remember
+
+What you described is a **probability mass function drawn as a horizontal bar
+chart** — one bar per outcome, stacked up the value axis, reaching right by
+how likely it is.
+
+The one you're half-remembering with the symmetric width is a **violin plot**:
+the same data mirrored so it bulges both ways.
+
+**I built the bar chart, not the violin**, and on purpose: you said you want to
+read *how likely* off the X axis, and mirroring turns that axis into a shape
+instead of a number. Your instinct about the layout was right — the value goes
+up the side, the odds go across.
+
+---
+
+# `./scripts/check-dice`
+
+It opens on the worked example, so it explains itself the moment it's on screen:
+**stat 247** — two hundred-sided dice, two twenty-sided, and a +7.
+
+| | |
+|---|---|
+| lowest | 11 |
+| **average** | **129.0** |
+| **highest** | **247** — exactly the stat |
+| wobble | 41.6, which is 32% of the average |
+| reaches 123 | 56.03% of the time |
+
+**The dice buttons are the shapes**: triangle for the 4, square for the 6,
+diamond for the 8, kite for the 10, pentagon for the 12, hexagon for the 20,
+circle for the 100. Click adds one, right-click takes one away. The count sits
+under each.
+
+**You guessed what was missing, and you were right — the flat bonus.** It's
+the **M** key. I added two more things you were circling but hadn't said:
+
+- **S — the stat box.** Type 247 and the pool fills itself the way the game
+  would fill it. This is really what the tool is for.
+- **T — the threshold.** Everything at or above it draws lit, everything below
+  dim, and the exact odds print underneath. That's the number you'll actually
+  balance against.
+
+**Y and X** pin the axes, exactly as you asked, so two different pools can be
+compared at one scale instead of each drawing itself to fit.
+
+The arithmetic is **exact, not sampled** — every distribution is built by
+convolving one die at a time — so the thin tail of the chart is as trustworthy
+as the fat middle. That matters for you: the rare good day is where "she needs a
+200" lives.
+
+---
+
+# Five things were broken and I fixed them
+
+**Building it found bugs that reading it wouldn't have.**
+
+1. **The chart drew a comb.** My binning let the row count go *above* the number
+   of outcomes, so twenty faces got spread across sixty-eight bins and most drew
+   empty. Looked like a picket fence.
+2. **Three text collisions** — the axis caption sat on the readout, and the
+   keys hint ran straight through the d4 and d6.
+3. **The tool pointed at itself.** LOVE puts the game's own folder in the first
+   argument and the launcher's argument in the *second*, so reading the first
+   made the project root the `dice-test` directory. It now looks for whichever
+   argument actually holds the file-index counter, rather than counting
+   positions.
+4. **I shadowed the module.** A local named `dice` counting how many dice were
+   in the pool hid the `dice` module inside the same function. Renamed.
+5. **The launcher promised something that didn't exist** — it offered terminal
+   numbers with no way to get them.
+
+That last one led somewhere good. **The arithmetic now lives beside the window
+rather than inside it**, at `scripts/dice-verdict.lua`, the same arrangement
+`check-colours` has with its verdict file. So:
+
+```
+luajit scripts/dice-verdict.lua
+```
+
+prints the whole table with no window, **and checks itself against answers
+worked out by hand** — two six-sided dice making seven is 6 in 36, a
+twenty-sided die averages 10.5, and every stat from 0 to 1000 cannot roll above
+itself. It also asserts the thing you'll rely on later: **the closed-form
+average and the long-way-round distribution agree**, because issue 513 needs the
+fast one and the window draws the slow one, and they must not drift apart.
+
+---
+
+# The issue files are written
+
+**504 is rewritten, not replaced** — vertical history, like you asked. It's
+now *"Where a Hero Goes, and How She Decides"*, and it says out loud that it
+reverses the no-pathfinding ruling it used to carry, with your wander quoted so
+the next reader knows what was traded away.
+
+**512 — Every Room Carries a Trial.** Zero, one or two ability checks per
+room, drawn at the level's depth on the same curve the monsters use — so the
+"monsters must outscale the guild" dial only has to be tuned once. Your "puzzle
+means room feature" correction is in it, which turns the puzzle table from a
+table of riddles into the table of *everything a room can have*, toilets and
+fruit trees included.
+
+**513 — Twenty Heroes See Twenty Maps.** The cost function, the walls, the
+search, and when a hero's map gets rebuilt.
+
+**715 — The Daycare Shuffles Itself.** The one I think is best. It's filed
+under the ghosts rather than the pathfinding, because it isn't a routing feature
+— it's a haunting. The working ruling is that it re-rolls **trials** and never
+**walls**, since moving a wall can strand a hero behind it and the run has no
+answer for that.
+
+And it's the first mechanic in the project where **a hero can be wrong about the
+world** rather than just unlucky in it. Her map is a belief, and after a shuffle
+her belief is simply wrong. The player sees the room change; she doesn't. She
+walks confidently into it.
+
+All three are in the roadmap and the phase progress files. The validator refused
+them until they were, which was the right call.
+
+---
+
+# The sharpest open question I hit
+
+**Does a hero know the trial of a room she hasn't entered?**
+
+Your frontier rule says she can *want* an unexplored room. Your own example says
+she doesn't know what's in it — *"a spirit and constitution hero might have to
+make a dex check when they arrive."*
+
+So an unexplored room can't be priced by its real trial. **It needs a guessed
+cost**, and nothing says what the guess is. Three options, best first:
+
+1. **The average room at this depth** — she expects typical trouble.
+2. **Cheap** — heroes are optimists, and the frontier pulls hard.
+3. **Expensive** — heroes are wary, and unexplored rooms get visited last,
+   which probably breaks exploring entirely.
+
+Also waiting: **what does failing a trial actually cost?** Time, damage,
+regression, or simply not getting in — nothing says, and 512 can't be built
+without it.
 
 --------------------------------------------------------------------------------
 

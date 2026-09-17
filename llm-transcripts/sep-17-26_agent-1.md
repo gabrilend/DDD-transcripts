@@ -1,6 +1,6 @@
 # Conversation Summary: a15d8ece-5009-45c4-9f6a-53f90dca61c6
 
-Generated on: 2026-09-16 22:46:40
+Generated on: 2026-09-17 09:45:35
 Models: claude-opus-5
 
 --------------------------------------------------------------------------------
@@ -923,6 +923,292 @@ hosts:
   emails are not filed as spam — that one genuinely points at AWS
 
 Or a fourth thing I have not thought of. Which is it?
+
+--------------------------------------------------------------------------------
+
+### User Request 7
+
+> The closest thing that exists is in the claim page design: the email carries
+> both a link and a code, and either one gets you in. But that is two routes to
+> one door, not two factors — they are alternatives, not a pair you need both
+> halves of. It exists because mail scanners follow
+> links in email automatically, so a link can be "visited" before a human sees
+> it, and a typed code is immune to that.
+
+Yeah that's what I meant by 2FA!
+
+> I did not touch issues 029 and 030 in the scripts project. They are committed
+> history over there, and marking them superseded should happen from a session
+> standing in that directory, not by me reaching across from here.
+
+oh can you move them here, rename them to fit our scheme and adjust as
+necessary, then untrack them from that repo and track them in ours? Sorry they
+were just misfiled so we should make it right.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 7
+
+> Moving files across repos, so let me check both are safe to touch first.
+
+> The scripts project is inside a **monorepo**, not its own repo — and there
+> is someone else's work in progress there. Let me check its rules before I
+> touch it:
+
+> No special rules there. Now let me find every reference before moving
+> anything:
+
+> Full picture. Now the move — first updating the references in the privacy
+> issue that will dangle:
+
+> Staged exactly my three paths — the refusal-gates work is untouched.
+> Committing there:
+
+> Verifying the old versions are genuinely recoverable, because your rule on
+> that is emphatic:
+
+> Both recoverable. Now fixing this repo's references so nothing points at the
+> old home:
+
+> Now the note, and the 2FA answer you just gave me:
+
+> Shell quoting leaked into the file and the old text's tail survived. Rewriting
+> that block properly:
+
+> All suites pass, but two things need flagging before I commit. First, a real
+> failure that a checker is letting through:
+
+> That one is interactive and hangs — leaving it. I have the failure text from
+> the suite already. Committing the move now:
+
+> The staged fridge shows **7 deletions** — and the sticker count jumped by
+> three I did not award. Another session is live in here right now. Checking
+> whether anything came off:
+
+> The staged index is **stale** and would delete 7 stickers. Let me check the
+> working tree still has them:
+
+> Working tree is safe — every committed sticker is there, plus 16 more. The
+> landmine is only in the stale index, so I'll defuse it without touching the
+> file:
+
+Done, and I found something on the way that you need to know about.
+
+## The 2FA thing
+
+Good — then it is already designed, and it changes nothing about hosting. I
+recorded it as answered.
+
+One naming note worth keeping straight, because the next person to read "2FA" in
+your notes will expect the other thing: **the link and the code are two routes
+to one door, not two factors.** A second factor is something you must supply *in
+addition* — password *and* phone. Yours are alternatives; either one alone
+lets you in. The pattern is right, the borrowed name just points somewhere else.
+
+So it adds no hosting requirement of its own. The claim page still needs a real
+server, but that is because a static host cannot run a program to accept a form
+— not because of the code.
+
+## The move is done, properly
+
+**In the monorepo** (and the scripts project turned out to live inside one, at
+`/mnt/mtwo/programming/ai-stuff` — it is not its own repository):
+
+- Both issues removed, committed as `f1521fd7`.
+- The privacy issue referenced them in four places and now points at their new
+  home, so nothing over there dangles.
+- **I did not touch the other session's work.** Two modified files and two
+  untracked files belonging to some refusal-gates work were sitting there. I
+  committed with named paths only; they are still exactly as I found them.
+- Both old versions are recoverable at `f1521fd7^` — I checked by reading them
+  back, 221 and 127 lines.
+
+**Here:** they are `10-003` (the renderer), `10-004` (publishing), and `10-005`
+(the timestamps). I grepped both repositories for every reference and fixed all
+of them — the website issue, the selling issue, and the handoff note. Nothing
+points at the old names any more.
+
+Committed as `5845f5c`, eleven files, named paths, transcripts riding along.
+
+## Two things I have to flag
+
+**Another session is working in this repo right now.** Three stickers appeared
+on the fridge while I was writing — the count went from 65 to 67 gold stars
+and 38 to 39 apples without me awarding them. That is not a problem by itself,
+but it explains the next thing.
+
+**There was a live landmine in the git index, and it would have taken seven
+stickers off the fridge.**
+
+`★ Insight
+─────────────────────────────────────`
+Someone staged `fridge.tsv` a while back. Since then, another session committed
+seven more stickers. The staged snapshot is from *before* those existed — so
+the index was sitting there holding an older, shorter fridge. A plain `git
+commit` by anybody would have written that older version and silently deleted
+seven real stickers:
+
+the symlink catch · the sync script planting its own hook · asking why the
+push would fail · the three-at-once answer · the transcripts going public on
+purpose · one front page for both repositories · eight things for the front
+page when five were asked for
+
+I left the fridge out of my own commit, so nothing happened. Then I unstaged it,
+which resets the index to match what is committed and **does not touch the file
+at all**. I verified afterwards: every committed sticker is still on the fridge,
+and the working tree now holds 111 lines against 95 committed.
+`─────────────────────────────────────────────────`
+
+Your rule is that nothing comes off the fridge. It was one ordinary `git commit`
+away from seven coming off. It is safe now, and the fridge is the only thing
+still uncommitted — I left it for you, since the newest stickers on it are not
+mine.
+
+**Also, a real test failure is being let through.** `check-colours` reports that
+the dexterity colour is dimmer than plain text to a tritanopia eye — 0.221
+against 0.277 — and the suite prints "continuing, because a collapsed pair is
+a design decision" and passes anyway. Your rule says a fallback is a warning and
+a warning is an error. This one predates today and is not mine, but nobody has
+told you about it.
+
+## Stickers
+
+**67 gold stars, 39 apples, no frowny faces, no worms** — and three of those
+arrived from the other session mid-sentence.
+
+Still 62% gold. The tightened rule only starts counting from now, so the ratio
+will take a while to move.
+
+--------------------------------------------------------------------------------
+
+### User Request 8
+
+Yay okay! So what else do we have to do before we can start building... What was
+it? The renderer, the website, the aws integration... Ummmm what's on our todo
+list? Can you build one out for me based on what we've talked about this
+session?
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 8
+
+> The checker only reports through the suite. Now building the list — the
+> house keeps these as a phase progress file:
+
+> The validator now reports failures — my progress file made phase 10 visible
+> to it. Let me see exactly what it says:
+
+> The two failures are the other session's new files, not mine. Which confirms
+> something — my five phase-10 issues are still invisible. Let me find out
+> why:
+
+> Found it, and it is precise. Let me record the actual mechanism:
+
+> The test grep printed nothing before that commit, which I should not have let
+> slide. Verifying now:
+
+All 18 checks and all 8 fridge checks pass — the earlier grep just missed
+across two suites.
+
+Here is your list. **The headline is that you can start building today.**
+
+## Nothing blocks the renderer
+
+It is the biggest piece of work in the phase and it waits on nobody. The three
+parts it is built from already exist and are proven in your
+`neocities-modernization` project:
+
+| piece | what it does |
+| --- | --- |
+| the markdown renderer | markdown to HTML, escapes every piece of text *before* emitting a tag, so a transcript can never inject markup into its own page |
+| the page-head builder | *ships* a monospace font instead of hoping the reader has one — it exists because box-drawing layouts sheared apart on phones |
+| the template substituter | fails the build on an unresolved marker, instead of printing `{GAME_TITLE}` on your live website |
+
+## The order, and what actually waits on what
+
+```
+     the host decision  ──> publish the site ──> a stranger can read
+          (needs you)              ^
+                                   │
+     the renderer ─────────────────┤
+     the website shell ────────────┘
+
+     the timestamps ── improves the links; nothing waits on it
+     selling ───────── independent of all of the above
+```
+
+So the only thing gating a reader is **which host**, and that gates
+*publishing*, not *building*. You could have the renderer working before you
+decide.
+
+## Seven decisions waiting on you
+
+| | what it decides |
+| --- | --- |
+| **Which host, one machine or two** | whether the site ships before the claim page or with it |
+| Does the zip carry the history | the release tool's one real decision |
+| Follow up on the support ticket | whether the plainest argument reaches the reader |
+| Does the front page say it is for adults | the front page's whole design |
+| Does the site list anything besides games | whether the template needs a second list |
+| Access when the game ships | easier now than when a subscriber asks |
+| Does phase 10 belong in the roadmap | the gap below |
+
+## Four loose ends, and one of them is new and real
+
+**No checker can see phase 10 at all.** I went looking for why the validator
+kept saying everything agreed, and found it.
+
+`★ Insight
+─────────────────────────────────────`
+The validator recognises an issue file by the pattern `^(%d%d%d%l?)%-` —
+exactly three digits, an optional letter, then a hyphen. `101-the-tickle...`
+matches. `111a-every-mechanic...` matches. **`10-001-sell-access...` does not**,
+because the phase number is two digits and the hyphen arrives one character
+early.
+
+So all five phase-10 files are invisible to it. Not counted, not link-checked,
+never reported as missing from the roadmap. It reported "the documents agree"
+because it was looking at the nine phases it could see — a checker saying yes
+to a question it was not asked.
+
+I did **not** fix it, because the fix is coupled to your roadmap decision.
+Widening the pattern before answering that would just move where the wrong
+answer shows up.
+`─────────────────────────────────────────────────`
+
+The other three: the **colour test** that fails and is let through (dexterity
+reads dimmer than plain text to a tritanopia eye, 0.221 against 0.277); **your
+spoken answers are not in `her-answers.md`**, because that file only collects
+lines beginning with an arrow and everything you decided today arrived by
+speech; and **subagent transcripts are still uncaptured**, which stays with the
+exporter in the other project since the exporter really is shared.
+
+## Where it lives
+
+`issues/phase-10-progress.md` — the house's own mechanism for this. It holds
+the build order, the seven questions with what each one decides, the four loose
+ends, and a table of everything you settled today in your own words, so none of
+it has to be reconstructed from this conversation.
+
+Committed as `da0acf8`.
+
+## One thing you should know about the room
+
+**The other session is working fast.** While I was writing, two new phase-5
+issues appeared, a third was modified, and a dice-checking script and its test
+folder showed up. Those two new issues are the validator's only current failures
+— they are on disk and not in the roadmap yet, which is normal for work in
+progress.
+
+I have not touched any of it. The fridge is also still uncommitted and I left it
+that way, because the newest stickers on it are not mine.
+
+**67 gold stars, 39 apples, no frowny faces, no worms.**
+
+---
+
+So: **which host?** Answer that and the path to a reader is unobstructed from
+end to end.
 
 --------------------------------------------------------------------------------
 
