@@ -1,6 +1,6 @@
 # Conversation Summary: a15d8ece-5009-45c4-9f6a-53f90dca61c6
 
-Generated on: 2026-09-17 10:12:16
+Generated on: 2026-09-17 10:29:15
 Models: claude-opus-5
 
 --------------------------------------------------------------------------------
@@ -1578,6 +1578,184 @@ All 22 tests, 18 checks and 8 fridge checks pass. Documents agree.
 **70 gold stars, 45 apples.** Apple for picking Linode after hearing all four
 — you took the one that was a whole machine rather than the one with the
 biggest name on it.
+
+--------------------------------------------------------------------------------
+
+### User Request 11
+
+> One line from you and it lands: ! touch /tmp/claude-allow-unscoped-commit
+
+done
+
+> Mail is the part Linode does not solve. Your server can send mail in a few
+> lines, and mail from a fresh server's address is very often filed as spam
+> because it has no reputation yet. From your side that looks identical to a
+> subscriber who never bothered: the message leaves, nothing
+> bounces, nobody claims. That is an open question now, with a note that
+> whatever you pick, the thing to build early is a way to see a message actually
+> arrived.
+
+I got an email address from squarespace. It's 3$ per month which is tooooooo
+much but Google was giving me problems when making a personal email for business
+purposes so whatever. It's develop@abcd-games.net - when I went to create a
+linode account they clearly don't trust it tho because they gave me a 403 error
+as soon as I made it. What should I do? Should I make it with a personal email,
+then when it's made I switch to the new business one? I hate reputation, just...
+like, as a concept. It has no give, no sway, it's always just "these people
+don't know you so they don't trust you" or "these people know you and don't
+trust you and never will and now you just can't do this thing ever again because
+of something that wasn't even your fault but they don't care they just hate you
+because you said or did something they didn't want and now you're just screwed
+because fuck you" and it's like that's not a very productive way to live your
+life or organize your society!
+
+can we work on the stuff now?
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 11
+
+> The allow file exists but the gate still refuses. Let me look at what it
+> actually checks:
+
+> The token was spent by my *first* attempt — the gate consumed it, then git
+> failed on a missing message file. That's by design ("the safe direction to
+> fail"), but it means the grant went to a commit that never happened. I'll need
+> it once more when you have a moment; it is not blocking the work.
+>
+> Let me find the libraries so I can start building:
+
+> Same disk for the libraries (`/mnt/mtwo`), different from this project
+> (`/mnt/cmdo`). That decides something. Let me check the file-creation tool:
+
+> Good. Vendoring the three libraries first, with provenance recorded so drift
+> is visible:
+
+> Now the first real piece — the part that reads a transcript's structure:
+
+> That grep caught prose headings. Let me find the actual fixed markers:
+
+> Now I have the real structure. `###` is structural; `##` inside a body is the
+> assistant's own prose. Let me check the two remaining markers:
+
+> Found the model-change marker: `*model: claude-opus-5*` on its own line. Let
+> me match the house code style before writing:
+
+> Now I have the style. Writing the reader:
+
+> My mistake — it reads from **stdin**, not a file argument. Redoing it
+> properly:
+
+> Now the important part — does it actually work on your real transcripts?
+
+> Four of five parse. The fifth found a heading shape I did not know existed —
+> which is the loud-failure rule earning its keep. Let me find every variant:
+
+> Two more shapes, and one of them matters for the speech-separation rule you
+> just set:
+
+> All five parse. One thing is off, though — that first file's header lists
+> two models but only one shows as serving. Let me settle it rather than guess:
+
+> Confirmed against the session log — the header lists models in first-use
+> order. Now it's a fact, not a guess:
+
+> Now a real test, since your rule is that a fixed behaviour gets one:
+
+> Untracked files need staging first — `git commit -- <path>` only reaches
+> tracked paths:
+
+Yes — we're building. **The first working piece of the renderer is in.**
+
+## The Linode 403
+
+Your instinct is right: **make the account with your personal email, then add
+the business one after.**
+
+Here is what is actually happening, because it is not about you and it is worth
+knowing:
+
+Linode runs automated fraud screening at signup, and it scores *signals*, not
+people. A brand-new domain registered days ago, with a brand-new mailbox at that
+domain, is the exact fingerprint of a throwaway — because that is genuinely
+what fraudsters do. Your personal address has years of history behind it and
+scores completely differently.
+
+`★ Insight
+─────────────────────────────────────`
+The thing nobody tells you: **domain age is itself a signal, and nothing but
+time fixes it.** `abcd-games.net` is days old. It will score badly at signups
+*and* at mail delivery for a while regardless of what you do.
+
+Which means the useful move is to start the clock now. Set up the sending
+records in DNS early, even before you need them, so the domain is accumulating a
+history while you build. By the time the first claim email goes out, the domain
+is months old instead of hours.
+`─────────────────────────────────────────────────`
+
+On reputation systems generally — you are describing a real design flaw, not a
+bad mood. These systems have no channel for "new and legitimate," so newness and
+fraud collapse into the same score. And they rarely have an appeal that a person
+reads. The one thing that helps here is that Linode's block is reviewable: their
+support unblocks accounts by hand when you ask. So if the personal-email route
+also trips it, that is the path, and it is a person on the other end.
+
+## What got built
+
+`src/047-transcript-reader.lua`, with `tests/048-transcript-reader.lua` beside
+it. It takes a saved conversation and hands back its shape — who spoke, in
+what order, which model answered — as plain data. No files opened, no HTML
+produced, so the same reader serves the website and the timeline.
+
+**The whole parser rests on one distinction.** The exporter writes its headings
+at `###`. A model writing prose writes its own at `##`. Nothing else separates
+them, and if you got that backwards a long reply would shatter into dozens of
+fragments.
+
+**The corpus corrected me twice.** I wrote it knowing two heading shapes, ran it
+against your five real transcripts, and it stopped dead:
+
+```
+ERROR unrecognised transcript heading: Assistant Response 8 (continued)
+```
+
+That is your rule about preferring errors to fallbacks, earning its keep on the
+first run. A reader that quietly skipped the unknown line would have dropped
+**ten replies** onto the floor and still printed a page that looked perfect.
+Hunting for the rest found a fourth shape too — when a conversation runs out
+of room, the harness writes a recap whose own heading says it belongs to
+*neither speaker*. That got its own kind, because folding machine bookkeeping
+into your replies on a public page is exactly the mistake you set the rule about
+this morning.
+
+**One attribution I checked instead of assuming.** The exporter marks a model
+only where it *changes*, so the first model never carries a mark. I could have
+guessed the header lists them in first-use order — instead I read Claude
+Code's own session log for the one conversation that used two, and confirmed it:
+fable first, opus later, marker partway down. It is a fact in the comments now,
+not a guess, because that line becomes a public claim about whose words those
+are.
+
+**All 22 tests pass, 11 test files, 18 checks, 8 fridge checks, documents
+agree.** Committed.
+
+The three libraries are copied into `libs/` rather than reached across to, with
+the commit they came from recorded — because your release zip is the whole
+repository, and a path pointing at `/mnt/mtwo` resolves on your machine and
+nowhere else.
+
+## Two things still open
+
+**The git token got spent by a failed command.** Your gate deletes it *before*
+running the commit ("the safe direction to fail"), and my first attempt died on
+a missing message file — so the grant went to a commit that never happened.
+`docs/019-roadmap.md` and `validate-documentation` are still staged and correct.
+One more `! touch /tmp/claude-allow-unscoped-commit` when convenient.
+
+**70 gold stars, 46 apples.** Apple for the email and for reading the 403
+correctly.
+
+Next up is turning a conversation into a page. Want me to keep going?
 
 --------------------------------------------------------------------------------
 
