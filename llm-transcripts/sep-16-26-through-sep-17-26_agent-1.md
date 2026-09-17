@@ -1,6 +1,6 @@
 # Conversation Summary: 8984f7b0-70ae-4b9c-a0e4-e8c3d15d6c57
 
-Generated on: 2026-09-17 09:47:46
+Generated on: 2026-09-17 10:09:40
 Models: claude-opus-5
 
 --------------------------------------------------------------------------------
@@ -3092,6 +3092,215 @@ cost**, and nothing says what the guess is. Three options, best first:
 Also waiting: **what does failing a trial actually cost?** Time, damage,
 regression, or simply not getting in — nothing says, and 512 can't be built
 without it.
+
+--------------------------------------------------------------------------------
+
+### User Request 17
+
+Okay so I think we have three axises, which I think means we need three charts.
+Though violin charts can do three axises, I think they aren't the right fit
+because we always want to go down to (near) zero, because if you have 600
+strength then your lowest roll is... 6. And that's basically zero. So we have
+probability of rolling a value, we have the value, and we have (crucially) the
+stat value that produces that output sometimes. Also modifiers gotta be built
+into it somehow. Is there anything I'm missing?
+
+Hmmmmm I think the chart looks pretty good, and we're setting the stat value by
+manually adding dice. I like that. Shouldn't the Y axis be derived? Also, what's
+the X axis again? Also can we mouse over bars to see... I dunno, stats about
+that particular bar? Anything you can think of that would be related to that bar
+only. General stats can stay down at the bottom. Can you re-use the tooltip
+stuff from the equipment or inventory? We're going to do a refactor later and
+split out various functionality like tooltips, windows, etc.
+
+For the shuffling, we should draw a red exclamation mark on the hex that lasts
+until either the player clicks on it and views the new trial, or a new hero
+enters. Or maybe we should just replace the fog of war, except it's more like...
+red-exclamation-fog-of-war? What do you think? Should we allow the player to
+see? I don't think they really can make any plans based on a shuffled room, it's
+mostly for hero pathfinding. So we might wanna just let them see "oh this room
+is a dex challenge now, neat"
+
+> Your frontier rule says she can want an unexplored room. Your own example says
+> she doesn't know what's in it — "a spirit and constitution hero might have
+> to make a dex check when they arrive."
+>
+> So an unexplored room can't be priced by its real trial. It needs a guessed
+> cost, and nothing says what the guess is.
+
+for this, I think we should just treat the unexplored room as the goal. It
+shouldn't have a cost. Every hero will have a goal when pathing, so there's no
+reason to factor it into the price. It's like starting counting from 7, you're
+always going to be +7 so why not just start at 0?
+
+> Also waiting: what does failing a trial actually cost? Time, damage,
+> regression, or simply not getting in — nothing says, and 512 can't be built
+> without it.
+
+depends on the trial. For now let's just say time, damage, regression. Maybe it
+also takes a piece of gear that they're wearing randomly, and keeps it until
+they pass the trial again. It might also deal permanent stat damage... But only
+like 1 or 2. And heroes can regain it by adventuring and just passing the trial
+often brings stat growth so it's fine.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 17
+
+> Good news — the tooltip is already factored out. `windows` owns the
+> placement rule and `window-frame` draws it.
+
+> Now wiring the project's own tooltip into the dice tool, plus the axis fix.
+
+> The colour resolver refused rather than guessed — the project's own
+> errors-not-fallbacks rule catching me.
+
+> No way to drive the cursor on this box, so I can photograph the axis but not
+> the tooltip.
+
+> The tooltip showed — the cursor happened to be sitting over the chart. Let
+> me record your rulings.
+
+**One gold star, three apples.** ⭐ the hostage gear. 🍎 the destination not
+being part of the price, 🍎 letting the player see the shuffled room, 🍎 the
+three-axis analysis.
+
+Fridge: **70 gold stars, 44 apples.** Ratio down to 60% from 63.
+
+---
+
+# Your three axes want a heatmap, not three charts
+
+You're right that a violin is wrong, and your reason is the right reason: **the
+floor is always near zero whatever the stat is.** Stat 600 has a minimum of 6.
+Stat 60 has a minimum of 3. The bottom is the boring end and it never moves, so
+a symmetric shape wastes half its ink on nothing.
+
+What shows all three at once is a **heatmap**: stat across the bottom, value up
+the side, probability as colour. Every vertical slice is one stat's whole
+distribution, and the picture you'd get is a rising ridge — **with visible
+notches in it at every 20 and every 100**, because that's where the average
+drops. You'd see the sawtooth as a jagged edge instead of having to take my word
+for it.
+
+## What you're missing is a fourth thing, and it's the one you'll actually balance against
+
+`P(value | stat)` is the chart. But the question a designer asks is:
+
+> **a hero with stat S, against a difficulty D — does she pass?**
+
+That's `P(pass | stat, difficulty)`, and it's a *different* surface: stat
+across, difficulty up, **chance of passing** as colour. It's the cumulative
+version of the first one.
+
+That's the chart you'd use to set a room's difficulty. The first one tells you
+what a roll looks like; the second tells you whether the daycare is too hard
+yet.
+
+## And modifiers don't need an axis, because this game doesn't have them
+
+Here's a thing I found checking: **your penalty pipeline multiplies stats, it
+doesn't subtract from rolls.**
+
+So a hero who is desperate, hungry, and standing next to two messy friends
+doesn't get a minus on her die. **Her stat goes down, and the dice she rolls
+change shape.**
+
+A hero at 100 strength rolls **1d100** — average 50.5, wildly swingy.
+Penalise her to 70 and she rolls **3d20 + 10** — average 41.5, and *much
+steadier*.
+
+She got worse **and more reliable at the same time.** That's not a modifier,
+it's a different hand of dice. Which means the tool doesn't need a modifier axis
+— it needs a way to show **a stat and its penalised twin side by side.**
+
+---
+
+# The stat damage you proposed sometimes makes a hero better
+
+You said failing might cost a permanent point or two. Under your own dice rule:
+
+| | rolls | average |
+|---|---|---|
+| a hero at **100** | 1d100 | **50.5** |
+| the same hero at **99** | 4d20 **+19** | **61.0** |
+
+**Losing a point is worth ten and a half to her.** And it makes her far
+steadier, because a flat +19 has no luck in it at all.
+
+That's not a bug I can fix — it falls straight out of "one big die per
+hundred." It's either a funny thing to keep (getting hurt knocks you back into a
+shape you understand) or a hole to close. **Your call**, and it's written into
+512 as needing one.
+
+---
+
+# The tool
+
+**Shouldn't the Y axis be derived?** It already is — it's the highest the dice
+can roll, computed. Pressing **Y** is the *override*, for when you want two
+different pools drawn at one scale.
+
+**What's the X axis?** That was fair feedback — a single number at the right
+end wasn't enough. It now has five ticks and says in words: **"chance of rolling
+this, out of every hundred rolls."**
+
+**The tooltip — yes, and it was already reusable.** I didn't write one.
+`032-windows` owns the rule about which corner a label goes in (yours: the
+opposite quadrant from the cursor), and `041-window-frame` draws the box. Both
+are already split out, so your later refactor has less to do than you thought.
+The dice tool now calls the same two.
+
+Hovering a bar gives you:
+
+```
+rolls 146
+exactly this    0.830%
+this or better 35.19%
+this or worse  65.64%
+about one roll in 121
+```
+
+I couldn't drive the cursor on this machine to photograph it deliberately —
+but the mouse happened to be sitting over the chart when I took the screenshot,
+so I've seen it work and the numbers are right.
+
+Loading the colour resolver, I hit your own error rule doing its job: *"Colours
+were asked for before they were loaded."* It refused instead of handing me a
+grey. Good error.
+
+---
+
+# Recorded
+
+**513** — the destination isn't priced, with your counting-from-seven
+reasoning kept in your words, because the reason isn't obvious and the next
+reader will want it. **It doesn't remove the price approximately; it removes a
+term that cancels.** The guessed-cost question is gone entirely.
+
+**512** — the five costs of failing. And the hostage is flagged for what it
+quietly does: it's now the **third** unrelated mechanism pushing heroes back
+over cleared ground, after your changing stats and the shuffle. None of the
+three was designed for it.
+
+**715** — the red exclamation, cleared by a click or by a hero walking in. And
+I ruled against your red-exclamation-fog, with a reason you can overturn: **fog
+means "you haven't looked here" and the mark means "what you saw is out of
+date."** Those are different facts and a player will want to tell them apart. So
+the mark sits *on top of* whatever fog the room has rather than replacing it.
+
+---
+
+**Three questions left open that I'd want before building any of it:**
+
+1. **Does a failed hero get in anyway?** Everything on your list is a price
+   paid, not a door shut. As written she pays and walks through. A trial that
+   can actually stop her is a stronger thing and a different game.
+2. **Which trials cost which of the five?** A toilet that refuses you and a
+   block room that eats your shoes shouldn't fail the same way.
+3. **Of two unexplored rooms, which does she pick?** Neither can be priced now,
+   so it falls back to distance — and a guild that always takes the nearest
+   crawls outward in a shell instead of exploring.
 
 --------------------------------------------------------------------------------
 
