@@ -1,6 +1,6 @@
 # Conversation Summary: a15d8ece-5009-45c4-9f6a-53f90dca61c6
 
-Generated on: 2026-09-17 10:29:15
+Generated on: 2026-09-17 11:04:45
 Models: claude-opus-5
 
 --------------------------------------------------------------------------------
@@ -1756,6 +1756,172 @@ One more `! touch /tmp/claude-allow-unscoped-commit` when convenient.
 correctly.
 
 Next up is turning a conversation into a page. Want me to keep going?
+
+--------------------------------------------------------------------------------
+
+### User Request 12
+
+Yeah keep going until it's done then let's assess what we have and what we need
+to adjust. Try and use the same color palette that the check-demos use in the
+scripts/ directory.
+
+--------------------------------------------------------------------------------
+
+### Assistant Response 12
+
+> Let me find that palette first.
+
+> Found it — `M.palette` in the balance table, RGB 0–1, and the demos all
+> read from there. Let me check the vendored libraries' APIs:
+
+> Now the palette-to-CSS piece, so the site reads your balance table rather than
+> holding a second copy:
+
+> The game's own palette, straight out of the balance table. Now the page
+> builder:
+
+> Anchors are in, ready for the timestamps later. Now the commit timeline —
+> the landing page:
+
+> Two things wrong — only 8 of 43 commits, and no transcripts found. The
+> record marker is in the wrong place, so each chunk holds the *previous*
+> commit's files:
+
+> All 43 commits, 31 runs, transcripts found. Now the index page itself:
+
+> Now the build script that ties it all together:
+
+> The site builds — but **only 10 of 31 runs link to a conversation.** That's
+> the dead-name problem, and it's worth fixing rather than shipping:
+
+> Git tracked both renames. Let me follow them so the timeline stops
+> dead-ending:
+
+> The control character isn't valid in a pretty format. I only need the rename
+> lines anyway:
+
+> From 10 to **30 of 31** — the one remaining is commits since the last
+> conversation was written out, which is correct. Let me verify the output:
+
+> The site is real — 4 conversation pages and an index with 31 runs. Now tests
+> and the companion files:
+
+> Now the companion info files for the three new pieces:
+
+**The renderer is done.** One command builds the whole thing:
+
+```
+./scripts/build-transcript-site
+
+  conversations  4
+  commits        43
+  runs           31
+  runs linked    30 of 31
+
+  No fenced block over 200 lines.
+```
+
+## What it is, in five pieces
+
+| file | what it does |
+| --- | --- |
+| `047-transcript-reader` | a conversation → data |
+| `049-site-palette` | the game's colours → CSS |
+| `050-conversation-page` | data → one page |
+| `051-commit-timeline` | the mirror's history → the landing page |
+| `052-build-site` | joins them and writes the folder |
+
+**The colours are read, not chosen.** Your `M.palette` in the balance table —
+the same one the battle log, the map and `check-colours` read. The game stores
+each colour as three numbers 0–1 because that is what LÖVE wants when it
+draws; CSS wants two hex digits per channel. The conversion lives in one place,
+so tuning a colour moves all four at once:
+
+```
+--spirit: #ffe040   --intellect: #66c2ff   --strength: #ff8cc7
+--dexterity: #6bff26   --constitution: #b885f5   --ground: #050508
+```
+
+Spirit's yellow is the headings, intellect's blue is links and code borders, and
+the two speakers are divided by a spirit-coloured rule on her side and an
+intellect one on the assistant's.
+
+## Three things the build taught me by failing
+
+`★ Insight
+─────────────────────────────────────`
+**The record mark belongs at the front.** `git log --name-only` prints a
+commit's files *after* its header line. With my separator trailing, splitting
+the output handed every commit its *neighbour's* files. It read 8 commits of 43
+and found zero transcripts — wrong loudly enough to catch immediately, which
+is the only reason it did not ship.
+
+**Renames have to be followed.** Your exporter renames a transcript when a
+session resumes across a day boundary, so history holds names that no longer
+exist on disk. The first build linked **10 of 31** runs — two thirds of the
+story dead-ending. Git recorded both renames, so nothing had to be guessed.
+Following them: **30 of 31**. The last one is commits since the newest
+conversation was written out, which is correct.
+
+**The shipped font has to travel.** `page-head` declares a font under a private
+name so a visitor's local copy can never be substituted — but if the file is
+not beside the pages, every page silently falls back to whatever monospace the
+reader owns, and an 80-column transcript shears apart. That failure is invisible
+from here. It copies the font now.
+`─────────────────────────────────────────────────`
+
+## What a reader gets
+
+The landing page is **31 runs of commit messages, oldest first**, largest text
+on the page, with the conversation that produced each hung underneath and the
+first thing you said as the summary line:
+
+> *"hiiiiiiiiiiiiiiiii can you read the vision file and tell me what you
+> think?..."*
+
+Every turn on a conversation page carries `id="turn-N"` already — so when the
+sidecar timestamps land, the commit links have somewhere to scroll to. That was
+cheaper to write now than to retrofit.
+
+The harness's own recaps are drawn as **neither speaker** — centred, dimmed,
+dashed border — so machine bookkeeping never sits in your mouth on a public
+page.
+
+**27 new checks, 12 test files, 22 tests, 18 checks, 8 fridge checks, documents
+agree.** Committed as `097e0df`.
+
+---
+
+## Assessment: what we have and what needs adjusting
+
+**Ready:** the renderer, end to end.
+
+**The honest gap — only 4 conversations are on the site.** The mirror holds
+four transcripts, but this session alone has produced several more that have not
+been synced. The site is real and currently thin.
+
+**Three things I would flag before you publish any of it:**
+
+1. **There is no site *shell* yet.** The timeline is a bare page with no front
+   door, no age gate, no bio, no game page. Right now it would be a development
+   record with nothing around it. That is issue 10-002, and it is the next
+   build.
+2. **The age gate has to come before any of this is reachable**, and nothing
+   currently enforces that.
+3. **Nobody has looked at it.** I have checked structure, not appearance.
+   Everything above is "the markup is correct," not "it looks good." You should
+   open `tmp/shared-memory/site/index.html` in Firefox before we build anything
+   on top of it.
+
+**Still waiting on you:** the git token once more (roadmap + validator still
+staged), and the Linode account via your personal email.
+
+**70 gold stars, 47 apples.** Apple for pointing me at the demos' palette —
+that turned a copied set of hex values into a fourth reader of the one true
+table.
+
+Want me to build the site shell next, or would you rather look at the pages
+first?
 
 --------------------------------------------------------------------------------
 
