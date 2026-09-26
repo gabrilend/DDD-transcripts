@@ -1,7 +1,43 @@
 # Conversation Summary: 8984f7b0-70ae-4b9c-a0e4-e8c3d15d6c57
 
-Generated on: 2026-09-21 19:45:35
+Generated on: 2026-09-26 13:24:45
 Models: claude-opus-5
+
+## Contents
+
+1. 2026-09-16 10:51, after Request 3 - We're designing your stat-growth system:
+   the two ladders work, but stats must go unbounded with contest rolls
+   replacing the d100. Next: tell me whether growth follows the player's sliders
+   or what the hero actually did.
+2. 2026-09-16 11:08, after Request 5 - We're designing a stat-growth system for
+   the game: stats grow from experience points via per-stat pity-timer ladders,
+   with sliders picking which stat rolls. Next up is your second idea, once you
+   answer my four open questions.
+3. 2026-09-16 16:03, after Request 13 - We're designing Double Diaper Dungeon's
+   stat growth and class systems, and I just assessed the demos: zero built,
+   though the map, screen and wardrobe already run. Next, you pick whether I
+   write the combat roadmap or the seven-step path to the phase 1 demo.
+4. 2026-09-17 09:50, after Request 16 - We're designing Double Diaper Dungeon's
+   dice, stat growth, and pathfinding. I built the dice checker at
+   ./scripts/check-dice and wrote four pathfinding issue files. Next: you decide
+   what an unexplored room costs a hero before she's seen inside it.
+5. 2026-09-17 10:15, after Request 17 - We're designing Double Diaper Dungeon's
+   dice-based stat rolls and hero pathfinding; the dice checker tool and four
+   issue files are written and validating. Next: you answer whether a hero who
+   fails a room's trial still gets in.
+6. 2026-09-18 14:32, after Request 18 - We're designing Double Diaper Dungeon's
+   stat, dice, and pathfinding systems, writing each ruling into issue files.
+   Next: you pick one room you can picture and say what happens when a hero
+   fails its roll, so the trial table can be written.
+7. 2026-09-18 14:53, after Request 19 - We're designing the stat, dice, and
+   pathfinding systems for Double Diaper Dungeon and writing them into issue
+   files. The dice checker tool is built; issues 504, 512, 513, and 715 are
+   written. Next: pick values for how much a bounce teaches a hero, what a buddy
+   is worth, and what an attempt costs in tickles.
+8. 2026-09-18 18:04, after Request 20 - We're designing Double Diaper Dungeon's
+   stat, dice and pathfinding systems, recording each ruling into issue files.
+   Everything validates and the dice checker works. Next: you answer whether a
+   cleared room stays cleared when the daycare shuffles its trial.
 
 --------------------------------------------------------------------------------
 
@@ -2365,6 +2401,10 @@ okay you can commit things if you think we're ready for that...
 > is a great one. Bring me your little-sounding words and we'll find them homes.
 >
 > Now let me put the day in the record.
+
+*[commit] dd2a204 - The licence was settled long ago and the instructions never noticed*
+
+*[commit] 30271dd - A map of the body, the shape that turned up fourteen times, and a hand that mends*
 
 Both in, tree clean.
 

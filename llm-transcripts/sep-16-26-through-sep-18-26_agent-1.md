@@ -1,7 +1,52 @@
 # Conversation Summary: a15d8ece-5009-45c4-9f6a-53f90dca61c6
 
-Generated on: 2026-09-21 19:45:35
+Generated on: 2026-09-26 13:24:45
 Models: claude-opus-5
+
+## Contents
+
+1. 2026-09-16 19:50, after Request 1 - You asked for a status report on the
+   handoff note; I gave it, covering the finished transcript system and the
+   unbuilt plan to sell repo access. Next: answer whether I can commit the two
+   untracked files.
+2. 2026-09-16 20:07, after Request 2 - You asked for a status report on the
+   distribution handoff; I folded your zip answer into the issue file and
+   awarded a gold star. Next: tell me whether the subscriber zip includes git
+   history or just the current files.
+3. 2026-09-16 20:36, after Request 5 - We're setting up abcd-games.net so
+   strangers can read the development transcripts, with the renderer and site
+   issues now written and all decisions recorded. Next: you pick where the
+   domain points — Neocities, GitHub Pages, or a rented host.
+4. 2026-09-17 09:35, after Request 7 - We're building phase 10, the distribution
+   side of the game: the paid zip, the private repo, and a free website at
+   abcd-games.net with the transcripts on it. Next you pick the host, since
+   everything else waits on the domain resolving.
+5. 2026-09-17 10:03, after Request 9 - We're building the free ABCD-games
+   website and paid SubscribeStar access for Double Diaper Dungeon; phase 10
+   issues, validator fix, and your decisions are all recorded and committed.
+   Next: I need your okay to commit the roadmap and validator files, which also
+   carry the other session's rows.
+6. 2026-09-17 10:15, after Request 10 - We're building the free ABCD-games
+   website and the paid-access claim page on Linode, and phase 10's five issues
+   are now written, formatted and mostly committed. One thing is waiting: type
+   `! touch /tmp/claude-allow-unscoped-commit` so I can commit the roadmap and
+   validator fix.
+7. 2026-09-17 10:32, after Request 11 - We're building the free ABCD-games
+   website and paid access for Double Diaper Dungeon; the transcript reader now
+   works and is committed. Next is turning a conversation into an HTML page, and
+   you owe one `! touch /tmp/claude-allow-unscoped-commit` for two staged files.
+8. 2026-09-17 11:07, after Request 12 - We're building abcd-games.net so people
+   can read your dev transcripts free and buy the code; the transcript renderer
+   is finished and committed. Next: open tmp/shared-memory/site/index.html in
+   Firefox to check how it looks before I build the site shell around it.
+9. 2026-09-18 14:48, after Request 14 - We're building abcd-games.net: the
+   transcript site, age gate, and shell pages are done, and all your formatting
+   fixes just landed and passed. Next up is the deploy script to point the
+   domain at your new Linode and get a certificate.
+10. 2026-09-18 15:29, after Request 16 - We're building the ABCD-games website
+    so people can read your dev transcripts, and the site is built and working
+    locally. You're pointing abcd-games.net at your new Linode; next step is
+    fixing SSH access via the LISH console, then DNS.
 
 --------------------------------------------------------------------------------
 
@@ -964,6 +1009,8 @@ were just misfiled so we should make it right.
 > Staged exactly my three paths — the refusal-gates work is untouched.
 > Committing there:
 
+*[commit] f1521fd7 - Two issues move to the project whose work they describe*
+
 > Verifying the old versions are genuinely recoverable, because your rule on
 > that is emphatic:
 
@@ -980,6 +1027,8 @@ were just misfiled so we should make it right.
 
 > That one is interactive and hangs — leaving it. I have the failure text from
 > the suite already. Committing the move now:
+
+*[commit] 5845f5c - Phase ten gets its free tier, and two misfiled issues come home*
 
 > The staged fridge shows **7 deletions** — and the sticker count jumped by
 > three I did not award. Another session is live in here right now. Checking
@@ -1103,6 +1152,8 @@ session?
 > why:
 
 > Found it, and it is precise. Let me record the actual mechanism:
+
+*[commit] da0acf8 - Phase ten gets a progress page, and a checker's blind spot is named*
 
 > The test grep printed nothing before that commit, which I should not have let
 > slide. Verifying now:
@@ -1311,6 +1362,8 @@ can you build a todo list for me using your built-in todo list?
 
 > The roadmap may now hold both my changes and theirs. Let me check before
 > committing it:
+
+*[commit] 8c01c35 - The phase ten issues learn the house format, and her voice gets a rule*
 
 Done. Here is everything, and then the host answer.
 
