@@ -114,7 +114,8 @@ awk -F'\t' -v patch="${PATCH}" '
             printf "better costume; see the stickers section of the guidance file.\n"
         } else if (gold * 3 > total) {
             printf "More than one sticker in three is a gold star. The bar has slipped:\n"
-            printf "a gold star is for work that changed what could be done next.\n"
+            printf "a gold star is for making -- a lot of hand-made work, or extra credit built.\n"
+            printf "Deciding well is an apple.\n"
         }
         if (frowny + worms == 0) {
             printf "Nothing bad has ever gone on this fridge, which is a sign of flinching\n"
